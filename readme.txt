@@ -11,11 +11,8 @@ Export WooCommerce order details in csv format.
 
 == Description ==
 This plugin exports data of WooCommerce orders, which may include Customer Name, Product details along with quantity, name and variation details, Amount paid., Customer Email and Order status. The data will be exported in the form of csv file.
-
 You can add more fields to export and extend the functionality by using hooks.
-
 It has extensive options in woocommerce setting page, you can select which fields will be present in csv file.
-
 Plugin follows all the codex guidelines in its code.
 
 = Features =
