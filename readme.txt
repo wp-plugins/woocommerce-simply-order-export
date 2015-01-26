@@ -1,7 +1,7 @@
 === WooCommerce Simply Order Export ===
 Contributors: ankitgadertcampcom
 Tags: woocommerce, order, export, csv, duration, woocommerce-order, woocommerce-order-export
-Requires at least: WordPress 3.7 WooCommerce 2.2.10
+Requires at least: WordPress 3.9 WooCommerce 2.2.10
 Tested up to: WordPress 4.1 + WooCommerce 2.2.10
 Stable tag: 1.0.0
 License: GPLv2 or later (of-course)
