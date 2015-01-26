@@ -1,0 +1,8 @@
+.wpg-inputs { margin-top: 50px; }
+.wpg-dateholder { display: inline-block; margin-left: 25px; }
+	.wpg-dateholder:first-child { margin-left: 0; }
+.wpg-dateholder label, .wpg-dateholder .wpg-datepicker { vertical-align: middle; }
+.wpg-dateholder label { font-weight: 700; font-style: italic; }
+.orderexport-button { margin-top: 30px; }
+.orderexport-button .spinner { float: none; }
+.wpg-error { padding: 5px 10px;background: #FFF;border-left: 5px solid red; }
