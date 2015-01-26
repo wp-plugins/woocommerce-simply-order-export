@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: Order Export by WPGEEKO
+ * Plugin Name: WooCommerce Simply Order Export
  * Description: Downloads order details in csv format
- * Version: 1
- * Author: wpgeeko
+ * Version: 1.0.0
+ * Author: Ankit Gade
  * Author URI: http://sharethingz.com
  * License: GPL2
  */
