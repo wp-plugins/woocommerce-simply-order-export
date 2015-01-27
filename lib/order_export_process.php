@@ -31,7 +31,7 @@ if( !class_exists('order_export_process') ) {
 			$fields		=	self::export_options();
 			$headings	=	self::csv_heading($fields);
 
-			$args = array( 'post_type'=>'shop_order', 'posts_per_page'=>-1, 'post_status'=>array('wc-completed', 'wc-processing', 'publish') );
+			$args = array( 'post_type'=>'shop_order', 'posts_per_page'=>-1, 'post_status'=> apply_filters( 'wpg_order_statuses', array_keys( wc_get_order_statuses() ) ) );
 			$args['date_query'] = array( array( 'after'=>  filter_input( INPUT_POST, 'start_date', FILTER_DEFAULT ), 'before'=> filter_input( INPUT_POST, 'end_date', FILTER_DEFAULT ), 'inclusive' => true ) );
 
 			$orders = new WP_Query( $args );
