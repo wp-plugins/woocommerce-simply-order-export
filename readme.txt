@@ -3,7 +3,7 @@ Contributors: ankitgadertcampcom
 Tags: woocommerce, order, export, csv, duration, woocommerce-order, woocommerce-order-export
 Requires at least: WordPress 3.9 WooCommerce 2.2.10
 Tested up to: WordPress 4.1 + WooCommerce 2.2.10
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later (of-course)
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -46,3 +46,9 @@ Activate it through the 'Plugins' section.
 
 = 1.0.1 =
 * Added 'wpg_order_statuses' hook to filter post status in export query.
+
+= 1.0.2 =
+* Added nonce to export request to make it more secure.
+* Renamed file order_export_process to order-export-process
+* Check for ABSPATH constant at start of files to avoid data leaks.
+* Check for WooCommerce installation in main plugin file.

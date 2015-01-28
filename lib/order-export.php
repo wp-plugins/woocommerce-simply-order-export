@@ -186,7 +186,7 @@ if( !class_exists( 'wpg_order_export' ) ){
 					<span class="spinner"></span>
 				</div>
 			</div>
-			<input type="hidden" name="wpg_order_export_nonce" value="<?php echo wp_create_nonce('wpg_order_export') ?>" />
+			<input type="hidden" id="wpg_order_export_nonce" name="wpg_order_export_nonce" value="<?php echo wp_create_nonce('wpg_order_export') ?>" />
 			<?php
 		}
 		
@@ -205,6 +205,12 @@ if( !class_exists( 'wpg_order_export' ) ){
 			
 			if( !self::checkdate( $_POST['end_date'] ) ) {
 				return new WP_Error( 'invalid_end_date', __( 'Invalid end date.', 'OE' ) );
+			}
+			
+			if( empty( $_POST['nonce'] ) ){
+				return new WP_Error( 'empty_nonce', __( 'Invalid request', 'OE' ) );
+			}elseif( !wp_verify_nonce( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ), 'wpg_order_export') ){
+				return new WP_Error( 'invalid_nonce', __( 'Invalid nonce.', 'OE' ) );
 			}
 		}
 
