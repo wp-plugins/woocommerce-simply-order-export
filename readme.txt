@@ -24,7 +24,7 @@ You can add more fields to export and extend the functionality by using hooks. I
 * Exports item quantity, product name along with variation details.
 * Options for fields which you want to export
 * Strong support.
-* For customization according to your need contact: http://sharethingz.com/contact/
+* For customization according to your need contact: https://www.facebook.com/shrthngz
 * Very lighweight code.
 * Translation ready code.
 
