@@ -49,6 +49,6 @@ Activate it through the 'Plugins' section.
 
 = 1.0.2 =
 * Added nonce to export request to make it more secure.
-* Renamed file order_export_process to order-export-process
+* Renamed file order_export_process to order-export-process.
 * Check for ABSPATH constant at start of files to avoid data leaks.
 * Check for WooCommerce installation in main plugin file.
