@@ -13,6 +13,7 @@ jQuery(document).ready(function() {
 		e.preventDefault();
 		var start_date = jQuery('#wpg-start-date').val();
 		var end_date = jQuery('#wpg-end-date').val();
+		var nonce = jQuery('#wpg_order_export_nonce').val();
 
 		if( jQuery.trim(start_date) === '' || jQuery.trim(end_date) === '' )
 			return;
@@ -20,7 +21,8 @@ jQuery(document).ready(function() {
 		var data = {
 			action : 'wpg_order_export',
 			start_date: start_date,
-			end_date : end_date
+			end_date : end_date,
+			nonce: nonce
 		};
 
 		jQuery.post( ajaxurl, data, function(response){

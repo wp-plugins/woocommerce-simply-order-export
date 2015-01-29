@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WooCommerce Simply Order Export
  * Description: Downloads order details in csv format
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: Ankit Gade
  * Author URI: http://sharethingz.com
  * License: GPL2
