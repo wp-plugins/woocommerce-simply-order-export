@@ -1,5 +1,6 @@
 === WooCommerce Simply Order Export ===
 Contributors: ankitgadertcampcom
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ankit%2ect%40gmail%2ecom&lc=US&item_name=ShareThingz&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest
 Tags: woocommerce, order, export, csv, duration, woocommerce-order, woocommerce-order-export
 Requires at least: WordPress 3.9 WooCommerce 2.2.10
 Tested up to: WordPress 4.1 + WooCommerce 2.2.10
