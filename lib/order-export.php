@@ -24,21 +24,6 @@ if( !class_exists( 'wpg_order_export' ) ){
 			add_action( 'admin_init' , array( $this, 'oe_download' ) );
 		}
 
-		/**
-		 * Runs when plugin is activated.
-		 */
-		function install() {
-
-			global $wpg_order_columns;
-
-			foreach( $wpg_order_columns as $key=>$val ){
-				
-				$option = get_option( $key, null );
-				if( empty( $option ) ) {
-					update_option($key, 'yes');
-				}
-			}
-		}
 
 		public function scripts( $pagehook ) {
 
@@ -140,7 +125,7 @@ if( !class_exists( 'wpg_order_export' ) ){
 					'id'   => 'wc_settings_tab_customer_phone'
 				),			
 
-				'phone' => array(
+				'order_status' => array(
 					'name' => __( 'Status', 'woocommerce-settings-tab-demo' ),
 					'type' => 'checkbox',
 					'desc' => __( 'Order Status', 'woocommerce-settings-order-export' ),
