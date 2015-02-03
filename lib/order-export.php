@@ -57,7 +57,7 @@ if( !class_exists( 'wpg_order_export' ) ){
 		 * @return array $settings_tabs Array of WooCommerce setting tabs & their labels, including the Subscription tab.
 		 */
 		public function add_settings_tab( $settings_tabs ) {
-			$settings_tabs['order_export'] = __( 'Order Export', 'woocommerce-settings-order-export' );
+			$settings_tabs['order_export'] = __( 'Order Export', 'woocommerce-simply-order-export' );
 			return $settings_tabs;
 		}
 
@@ -94,7 +94,7 @@ if( !class_exists( 'wpg_order_export' ) ){
 			$settings = array(
 
 				'section_title' => array(
-					'name'     => __( 'WooCommerce Order Export', 'woocommerce-settings-order-export' ),
+					'name'     => __( 'WooCommerce Order Export', 'woocommerce-simply-order-export' ),
 					'type'     => 'title',
 					'desc'     => '',
 					'id'       => 'wc_settings_tab_orderexport_section_title'
@@ -102,48 +102,48 @@ if( !class_exists( 'wpg_order_export' ) ){
 
 				'short_desc' => array(
 					'type'     => 'short_desc',
-					'desc'     => __( 'Please choose settings for order export.', 'woocommerce-settings-order-export' ),
+					'desc'     => __( 'Please choose settings for order export.', 'woocommerce-simply-order-export' ),
 				),
 
 				'customer_name' => array(
-					'name' => __( 'Customer Name', 'woocommerce-settings-tab-demo' ),
+					'name' => __( 'Customer Name', 'woocommerce-simply-order-export' ),
 					'type' => 'checkbox',
-					'desc' => __( 'Customer Name', 'woocommerce-settings-order-export' ),
+					'desc' => __( 'Customer Name', 'woocommerce-simply-order-export' ),
 					'id'   => 'wc_settings_tab_customer_name'
 				),
 
 				'product_info' => array(
-					'name' => __( 'Items Purchased', 'woocommerce-settings-tab-demo' ),
+					'name' => __( 'Items Purchased', 'woocommerce-simply-order-export' ),
 					'type' => 'checkbox',
-					'desc' => __( 'Export product details.', 'woocommerce-settings-order-export' ),
+					'desc' => __( 'Export product details.', 'woocommerce-simply-order-export' ),
 					'id'   => 'wc_settings_tab_product_info'
 				),
 
 				'amount' => array(
-					'name' => __( 'Amount', 'woocommerce-settings-tab-demo' ),
+					'name' => __( 'Amount', 'woocommerce-simply-order-export' ),
 					'type' => 'checkbox',
-					'desc' => __( 'Amount paid by customer', 'woocommerce-settings-order-export' ),
+					'desc' => __( 'Amount paid by customer', 'woocommerce-simply-order-export' ),
 					'id'   => 'wc_settings_tab_amount'
 				),
 
 				'email' => array(
-					'name' => __( 'Email', 'woocommerce-settings-tab-demo' ),
+					'name' => __( 'Email', 'woocommerce-simply-order-export' ),
 					'type' => 'checkbox',
-					'desc' => __( 'Email of customer', 'woocommerce-settings-order-export' ),
+					'desc' => __( 'Email of customer', 'woocommerce-simply-order-export' ),
 					'id'   => 'wc_settings_tab_customer_email'
 				),
 
 				'phone' => array(
-					'name' => __( 'Phone', 'woocommerce-settings-tab-demo' ),
+					'name' => __( 'Phone', 'woocommerce-simply-order-export' ),
 					'type' => 'checkbox',
-					'desc' => __( 'Phone number of customer', 'woocommerce-settings-order-export' ),
+					'desc' => __( 'Phone number of customer', 'woocommerce-simply-order-export' ),
 					'id'   => 'wc_settings_tab_customer_phone'
 				),			
 
 				'phone' => array(
-					'name' => __( 'Status', 'woocommerce-settings-tab-demo' ),
+					'name' => __( 'Status', 'woocommerce-simply-order-export' ),
 					'type' => 'checkbox',
-					'desc' => __( 'Order Status', 'woocommerce-settings-order-export' ),
+					'desc' => __( 'Order Status', 'woocommerce-simply-order-export' ),
 					'id'   => 'wc_settings_tab_order_status'
 				),			
 				
@@ -168,21 +168,21 @@ if( !class_exists( 'wpg_order_export' ) ){
 
 		function section_end() { ?>
 
-			<h3 class="orderexport-action"><?php _e( 'Select Duration and Export', 'order_export' ) ?></h3>
+			<h3 class="orderexport-action"><?php _e( 'Select Duration and Export', 'woocommerce-simply-order-export' ) ?></h3>
 
 			<p class="wpg-response-msg"></p>
 			<div class="clearfix wpg-inputs">
 				<div class="wpg-dateholder">
-					<label for="wpg-start-date"><?php _e('Start Date', 'order_export') ?></label>
+					<label for="wpg-start-date"><?php _e('Start Date', 'woocommerce-simply-order-export') ?></label>
 					<input id="wpg-start-date" type="text" name="wpg_start_date" class="wpg-datepicker" value="" />
 				</div>
 				<div class="wpg-dateholder">
-					<label for="wpg-end-date"><?php _e('End Date', 'order_export') ?></label>
+					<label for="wpg-end-date"><?php _e('End Date', 'woocommerce-simply-order-export') ?></label>
 					<input id="wpg-end-date" type="text" name="wpg_end_date" class="wpg-datepicker" value="" />
 				</div>
 
 				<div class="orderexport-button">
-					<input type="button" class="button wpg-order-export" value="Export Orders" />
+					<input type="button" class="button wpg-order-export" value="<?php _e('Export Orders', 'woocommerce-simply-order-export') ?>" />
 					<span class="spinner"></span>
 				</div>
 			</div>
@@ -196,21 +196,21 @@ if( !class_exists( 'wpg_order_export' ) ){
 		static function validate() {
 
 			if( empty( $_POST['start_date'] ) || ( empty( $_POST['end_date'] ) ) ){
-				return new WP_Error( 'dates_empty', __( 'Enter both dates', 'OE' ) );
+				return new WP_Error( 'dates_empty', __( 'Enter both dates', 'woocommerce-simply-order-export' ) );
 			}
 			
 			if( !self::checkdate( $_POST['start_date'] ) ) {
-				return new WP_Error( 'invalid_start_date', __( 'Invalid start date.', 'OE' ) );
+				return new WP_Error( 'invalid_start_date', __( 'Invalid start date.', 'woocommerce-simply-order-export' ) );
 			}
 			
 			if( !self::checkdate( $_POST['end_date'] ) ) {
-				return new WP_Error( 'invalid_end_date', __( 'Invalid end date.', 'OE' ) );
+				return new WP_Error( 'invalid_end_date', __( 'Invalid end date.', 'woocommerce-simply-order-export' ) );
 			}
 			
 			if( empty( $_POST['nonce'] ) ){
-				return new WP_Error( 'empty_nonce', __( 'Invalid request', 'OE' ) );
+				return new WP_Error( 'empty_nonce', __( 'Invalid request', 'woocommerce-simply-order-export' ) );
 			}elseif( !wp_verify_nonce( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ), 'wpg_order_export') ){
-				return new WP_Error( 'invalid_nonce', __( 'Invalid nonce.', 'OE' ) );
+				return new WP_Error( 'invalid_nonce', __( 'Invalid nonce.', 'woocommerce-simply-order-export' ) );
 			}
 		}
 

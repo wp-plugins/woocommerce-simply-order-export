@@ -44,7 +44,7 @@ if( !class_exists('order_export_process') ) {
 				$csv_file = self::create_csv_file();
 				
 				if( empty($csv_file) ) {
-					return new WP_Error( 'not_writable', __( 'Unable to create csv file, upload folder not writable' ) );
+					return new WP_Error( 'not_writable', __( 'Unable to create csv file, upload folder not writable', 'woocommerce-simply-order-export' ) );
 				}
 
 				fputcsv( $csv_file, $headings );
@@ -83,7 +83,7 @@ if( !class_exists('order_export_process') ) {
 					/**
 					 * Check if we need product info.
 					 */
-					if( !empty( $fields['wc_settings_tab_customer_email'] ) && $fields['wc_settings_tab_customer_email'] === true )
+					if( !empty( $fields['wc_settings_tab_customer_phone'] ) && $fields['wc_settings_tab_customer_phone'] === true )
 						array_push( $csv_values, self::customer_meta( get_the_ID(), '_billing_phone' ) );
 
 					if( !empty( $fields['wc_settings_tab_order_status'] ) && $fields['wc_settings_tab_order_status'] === true ){
@@ -101,7 +101,7 @@ if( !class_exists('order_export_process') ) {
 				wp_reset_postdata();
 			}else {
 
-				return new WP_Error( 'no_orders', __( 'No orders for specified duration.' ) );
+				return new WP_Error( 'no_orders', __( 'No orders for specified duration.', 'woocommerce-simply-order-export' ) );
 			}
 		}
 

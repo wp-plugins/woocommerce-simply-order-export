@@ -4,7 +4,7 @@ Donate link: http://sharethingz.com
 Tags: woocommerce, order, export, csv, duration, woocommerce-order, woocommerce-order-export
 Requires at least: WordPress 3.9 WooCommerce 2.2.10
 Tested up to: WordPress 4.1 + WooCommerce 2.2.10
-Stable tag: 1.0.3
+Stable tag: 1.1.0
 License: GPLv2 or later (of-course)
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -56,3 +56,10 @@ Activate it through the 'Plugins' section.
 
 = 1.0.3 =
 * Fixed "invalid request" js error.
+
+= 1.1.0 =
+* Fixed Phone number export bug.
+* Made plugin translation ready.
+* Main file changed to class based structure.
+* Added po file for translation contribution.
+* Added French translation to plugin.
