@@ -28,6 +28,7 @@ You can add more fields to export and extend the functionality by using hooks. I
 * For customization according to your need contact: https://www.facebook.com/shrthngz
 * Very lighweight code.
 * Translation ready code.
+* Contribution in translating plugin to different languages is strongly encouraged.
 
 == Installation ==
 Install WooCommerce Simply Order Export from the 'Plugins' section in your dashboard (Plugins > Add New > Search for WooCommerce Simply Order Export ).
