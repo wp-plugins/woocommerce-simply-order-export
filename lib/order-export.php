@@ -16,6 +16,7 @@ if( !class_exists( 'wpg_order_export' ) ){
 			add_action( 'woocommerce_settings_tabs_order_export', array($this, 'settings_tab') );
 			add_action( 'woocommerce_update_options_order_export', array($this, 'update_settings') );
 			add_action( 'woocommerce_admin_field_short_desc', array($this, 'short_desc_field') );
+			add_action( 'woocommerce_admin_field_advanced_options', array($this, 'advanced_options') );
 			add_action( 'admin_enqueue_scripts', array($this, 'scripts') );
 			add_action( 'woocommerce_settings_wc_settings_tab_orderexport_section_end_after', array($this, 'section_end'), 999 );
 			
@@ -140,13 +141,19 @@ if( !class_exists( 'wpg_order_export' ) ){
 					'id'   => 'wc_settings_tab_customer_phone'
 				),			
 
-				'phone' => array(
+				'status' => array(
 					'name' => __( 'Status', 'woocommerce-simply-order-export' ),
 					'type' => 'checkbox',
 					'desc' => __( 'Order Status', 'woocommerce-simply-order-export' ),
 					'id'   => 'wc_settings_tab_order_status'
 				),			
-				
+
+				'advanced_options' => array(
+					'name' => __( 'Advanced Options', 'woocommerce-simply-order-export' ),
+					'type' => 'advanced_options',
+					'desc' => __( 'Order Status', 'woocommerce-simply-order-export' )
+				),
+
 				'orderexport_section_end' => array(
 					 'type' => 'sectionend',
 					 'id' => 'wc_settings_tab_orderexport_section_end'
@@ -174,11 +181,11 @@ if( !class_exists( 'wpg_order_export' ) ){
 			<div class="clearfix wpg-inputs">
 				<div class="wpg-dateholder">
 					<label for="wpg-start-date"><?php _e('Start Date', 'woocommerce-simply-order-export') ?></label>
-					<input id="wpg-start-date" type="text" name="wpg_start_date" class="wpg-datepicker" value="" />
+					<input id="wpg-start-date" type="text" name="start_date" class="wpg-datepicker" value="" />
 				</div>
 				<div class="wpg-dateholder">
 					<label for="wpg-end-date"><?php _e('End Date', 'woocommerce-simply-order-export') ?></label>
-					<input id="wpg-end-date" type="text" name="wpg_end_date" class="wpg-datepicker" value="" />
+					<input id="wpg-end-date" type="text" name="end_date" class="wpg-datepicker" value="" />
 				</div>
 
 				<div class="orderexport-button">
@@ -186,10 +193,54 @@ if( !class_exists( 'wpg_order_export' ) ){
 					<span class="spinner"></span>
 				</div>
 			</div>
-			<input type="hidden" id="wpg_order_export_nonce" name="wpg_order_export_nonce" value="<?php echo wp_create_nonce('wpg_order_export') ?>" />
-			<?php
+			<input type="hidden" id="wpg_order_export_nonce" name="nonce" value="<?php echo wp_create_nonce('wpg_order_export') ?>" />
+			<input type="hidden" name="action" value="wpg_order_export" /><?php
 		}
-		
+
+		/**
+		 * Advanced options.
+		 */
+		function advanced_options() { ?>
+
+			<tr valign="top" class="single_select_page">
+				<td style="padding-left: 0;" colspan="2">
+					<div class="woo-soe">
+						<a id="woo-soe-advanced" title="<?php _e('Click to see advanced options', 'woocommerce-simply-order-export') ?>" href="#"><?php _e('Advanced options', 'woocommerce-simply-order-export') ?></a>
+						<p><span style="font-style: italic;"><?php _e( 'These are one time use options and will not be saved.', 'woocommerce-simply-order-export' ) ?></span></p>
+						<div class="woo-soe-advanced" style="display: none;">
+							<table>
+
+								<tr>
+									<th>
+										<?php _e( 'Order Export Filename', 'woocommerce-simply-order-export' ) ?>
+										<img class="help_tip" data-tip="<?php _e('This will be the downloaded csv filename', 'woocommerce-simply-order-export') ?>" src="<?php echo OE_IMG; ?>help.png" height="16" width="16">
+									</th>
+									<td><input type="text" name="woo_soe_csv_name" value="" /><?php _e('.csv', 'woocommerce-simply-order-export') ?></td>
+								</tr>
+
+								<tr>
+									<th>
+										<?php _e('Order Statuses', 'woocommerce-simply-order-export') ?>
+										<img class="help_tip" data-tip="<?php _e('Orders with only selected status will be exported, if none selected then all order status will be exported', 'woocommerce-simply-order-export') ?>" src="<?php echo OE_IMG; ?>help.png" height="16" width="16">
+									</th>
+									<td>
+										<div class="order-statuses"><label><input type="checkbox" value="wc-completed" name="order_status[]" /><?php _e('Completed', 'woocommerce-simply-order-export') ?></label></div>
+										<div class="order-statuses"><label><input type="checkbox" value="wc-processing" name="order_status[]" /><?php _e('Processing', 'woocommerce-simply-order-export') ?></label></div>
+										<div class="order-statuses"><label><input type="checkbox" value="wc-on-hold" name="order_status[]" /><?php _e('On hold', 'woocommerce-simply-order-export') ?></label></div>
+										<div class="order-statuses"><label><input type="checkbox" value="wc-pending" name="order_status[]" /><?php _e('Pending', 'woocommerce-simply-order-export') ?></label></div>
+										<div class="order-statuses"><label><input type="checkbox" value="wc-cancelled" name="order_status[]" /><?php _e('Cancelled', 'woocommerce-simply-order-export') ?></label></div>
+										<div class="order-statuses"><label><input type="checkbox" value="wc-refunded" name="order_status[]" /><?php _e('Refunded', 'woocommerce-simply-order-export') ?></label></div>
+										<div class="order-statuses"><label><input type="checkbox" value="wc-failed" name="order_status[]" /><?php _e('Failed', 'woocommerce-simply-order-export') ?></label></div>
+									</td>
+								</tr>
+
+							</table>
+						</div>
+					</div>
+				</td>
+			</tr><?php
+		}
+
 		/**
 		 * Validates input
 		 */
@@ -211,6 +262,10 @@ if( !class_exists( 'wpg_order_export' ) ){
 				return new WP_Error( 'empty_nonce', __( 'Invalid request', 'woocommerce-simply-order-export' ) );
 			}elseif( !wp_verify_nonce( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ), 'wpg_order_export') ){
 				return new WP_Error( 'invalid_nonce', __( 'Invalid nonce.', 'woocommerce-simply-order-export' ) );
+			}
+
+			if( !empty( $_POST['woo_soe_csv_name'] ) && ( preg_match( '/^[a-zA-Z][a-zA-Z0-9\-\_]*\Z/', $_POST['woo_soe_csv_name'] ) === 0 ) ) {
+				return new WP_Error( 'invalid_csv_filename', __( 'Invalid CSV filename. Only letters, numbers, dashes and underscore are allowed.' ) );
 			}
 		}
 
@@ -251,11 +306,12 @@ if( !class_exists( 'wpg_order_export' ) ){
 				$response['error'] = true;
 				$response['msg'] = $result->get_error_message();
 			}else{
-				
+
 				$upload_dir = wp_upload_dir();
 				$response['url'] = $upload_dir['basedir'].'/order_export.csv';
+				$response['msg'] = empty( $_POST['woo_soe_csv_name'] ) ? 'order_export' : sanitize_file_name($_POST['woo_soe_csv_name']);
 			}
-			
+
 			echo json_encode( $response );
 			die;
 		}
@@ -267,6 +323,7 @@ if( !class_exists( 'wpg_order_export' ) ){
 
             $upload_dir =   wp_upload_dir();
             $filename   =   $upload_dir['basedir']. '/order_export.csv';
+			$download_filename = empty($_GET['filename']) ?  'order_export' : $_GET['filename'];
 
             if( !empty( $_GET['oe'] ) && file_exists( $filename ) && current_user_can('manage_options') ){
 
@@ -279,7 +336,7 @@ if( !class_exists( 'wpg_order_export' ) ){
                 header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
                 header('Content-Description: File Transfer');
                 header("Content-type: text/csv");
-                header("Content-Disposition: attachment; filename=order_export.csv");
+                header("Content-Disposition: attachment; filename=$download_filename.csv");
                 header("Expires: 0");
                 header("Pragma: public");
 

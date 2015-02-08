@@ -4,7 +4,7 @@ Donate link: http://sharethingz.com
 Tags: woocommerce, order, export, csv, duration, woocommerce-order, woocommerce-order-export
 Requires at least: WordPress 3.9 WooCommerce 2.2.10
 Tested up to: WordPress 4.1 + WooCommerce 2.2.10
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later (of-course)
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,21 @@ Activate it through the 'Plugins' section.
 == Screenshots ==
 
 1. WooCommerce Simply Order Export setting page.
+2. Advanced options.
+
+== Frequently Asked Questions ==
+
+= Export button not working, any problem ? =
+
+Please check your WooCommerce version it should be at least 2.2.10 and WordPress version should be at least 3.9
+
+= How to export orders with specific statuses ? =
+
+Go to advanced options and then check statuses you want to export.
+
+= How to add more fields to csv ? =
+
+Please use wpg_order_columns and wpg_before_csv_write hooks for performing this activity. Little WordPress programming knowledge is necessary for accomplishing this.
 
 == Changelog ==
 
@@ -63,4 +78,7 @@ Activate it through the 'Plugins' section.
 * Made plugin translation ready.
 * Main file changed to class based structure.
 * Added po file for translation contribution.
-* Added French translation to plugin.
+
+= 1.1.1 =
+* Added advanced options in settings page.
+* UI improvements.

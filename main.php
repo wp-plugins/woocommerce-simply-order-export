@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WooCommerce Simply Order Export
  * Description: Downloads order details in csv format
- * Version: 1.1.0
+ * Version: 1.1.1
  * Author: Ankit Gade
  * Author URI: http://sharethingz.com
  * License: GPL2
@@ -22,7 +22,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		/**
 		 * @var string
 		 */
-		public $version = '1.1.0';
+		public $version = '1.1.1';
 
 		/**
 		 * Constructor
@@ -38,7 +38,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			$this->set_variables();
 			$this->includes();
 			$this->instantiate();
-
+			
 			add_action( 'init', array($this, 'init') );
 		}
 		
@@ -46,7 +46,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		 * Fires at 'init' hook
 		 */
 		function init() {
-
+			
 			$this->load_plugin_textdomain();
 		}
 		
@@ -76,7 +76,6 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		 */
 		function define_constants() {
 
-			define( 'OE_SLASH' , '/' );
 			define( 'OE_URL', plugins_url('', __FILE__) ); /* plugin url */
 			define( 'OE_CSS', OE_URL. "/assets/css/" ); /* Define all necessary variables first */
 			define( 'OE_JS',  OE_URL. "/assets/js/" );

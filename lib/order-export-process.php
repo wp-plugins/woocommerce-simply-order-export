@@ -31,7 +31,10 @@ if( !class_exists('order_export_process') ) {
 			$fields		=	self::export_options();
 			$headings	=	self::csv_heading($fields);
 
-			$args = array( 'post_type'=>'shop_order', 'posts_per_page'=>-1, 'post_status'=> apply_filters( 'wpg_order_statuses', array_keys( wc_get_order_statuses() ) ) );
+			/* Check which order statuses to export. */
+			$order_statuses	=	( !empty( $_POST['order_status'] ) && is_array( $_POST['order_status'] ) ) ? $_POST['order_status'] : array_keys( wc_get_order_statuses() );
+
+			$args = array( 'post_type'=>'shop_order', 'posts_per_page'=>-1, 'post_status'=> apply_filters( 'wpg_order_statuses', $order_statuses ) );
 			$args['date_query'] = array( array( 'after'=>  filter_input( INPUT_POST, 'start_date', FILTER_DEFAULT ), 'before'=> filter_input( INPUT_POST, 'end_date', FILTER_DEFAULT ), 'inclusive' => true ) );
 
 			$orders = new WP_Query( $args );
@@ -69,23 +72,26 @@ if( !class_exists('order_export_process') ) {
 						array_push( $csv_values, self::product_info( $order_details ) );
 
 					/**
-					 * Check if we need product info.
+					 * Check if we need order amount.
 					 */
 					if( !empty( $fields['wc_settings_tab_amount'] ) && $fields['wc_settings_tab_amount'] === true )
 						array_push( $csv_values, $order_details->get_total() );
-					
+
 					/**
-					 * Check if we need product info.
+					 * Check if we need customer email.
 					 */
 					if( !empty( $fields['wc_settings_tab_customer_email'] ) && $fields['wc_settings_tab_customer_email'] === true )
 						array_push( $csv_values, self::customer_meta( get_the_ID(), '_billing_email' ) );
 
 					/**
-					 * Check if we need product info.
+					 * Check if we need customer phone.
 					 */
 					if( !empty( $fields['wc_settings_tab_customer_phone'] ) && $fields['wc_settings_tab_customer_phone'] === true )
 						array_push( $csv_values, self::customer_meta( get_the_ID(), '_billing_phone' ) );
 
+					/**
+					 * Check if we need order status.
+					 */
 					if( !empty( $fields['wc_settings_tab_order_status'] ) && $fields['wc_settings_tab_order_status'] === true ){
 						array_push( $csv_values, ucwords($order_details->get_status()) );
 					}
@@ -99,6 +105,7 @@ if( !class_exists('order_export_process') ) {
 					fputcsv( $csv_file, $csv_values );
 				}
 				wp_reset_postdata();
+
 			}else {
 
 				return new WP_Error( 'no_orders', __( 'No orders for specified duration.', 'woocommerce-simply-order-export' ) );

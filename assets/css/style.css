@@ -6,3 +6,6 @@
 .orderexport-button { margin-top: 30px; }
 .orderexport-button .spinner { float: none; }
 .wpg-error { padding: 5px 10px;background: #FFF;border-left: 5px solid red; }
+#woo-soe-advanced { font-size: 1.1em; }
+	#woo-soe-advanced:hover { border-bottom: 1px solid #0074a2; }
+.woo-soe .order-statuses { margin-top: 10px; }
