@@ -43,7 +43,7 @@ if( !class_exists( 'wpg_order_export' ) ){
 
 		public function scripts( $pagehook ) {
 
-			if( $pagehook === 'woocommerce_page_wc-settings' && (!empty( $_GET['tab'] )&& $_GET['tab'] === 'order_export') ) {
+			if(  (!empty( $_GET['tab'] )&& $_GET['tab'] === 'order_export') ) {
 				wp_enqueue_script('jquery-ui-datepicker');
 				wp_enqueue_style('jquery-ui-datepicker');
 				wp_enqueue_style('wpg-style', OE_CSS.'style.css');
