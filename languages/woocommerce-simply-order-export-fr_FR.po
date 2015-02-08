@@ -1,0 +1,134 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Simply Order Export\n"
+"POT-Creation-Date: 2015-02-04 01:20+0530\n"
+"PO-Revision-Date: 2015-02-04 01:30+0530\n"
+"Last-Translator: \n"
+"Language-Team: wpgeeko <alnobody70@gmail.com>\n"
+"Language: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: lib\n"
+
+#: main.php:94 lib/order-export.php:109 lib/order-export.php:111
+msgid "Customer Name"
+msgstr "Nom du client"
+
+#: main.php:95
+msgid "Product Information"
+msgstr "Informations sur le produit"
+
+#: main.php:96
+msgid "Order Amount ( $ )"
+msgstr "Montant de la commande"
+
+#: main.php:97
+msgid "Customer Email"
+msgstr "client Email"
+
+#: main.php:98
+msgid "Phone Number"
+msgstr "Numéro de téléphone"
+
+#: main.php:99 lib/order-export.php:146
+msgid "Order Status"
+msgstr "L'état des commandes"
+
+#: lib/order-export.php:60
+msgid "Order Export"
+msgstr "afin d'exportation"
+
+#: lib/order-export.php:97
+msgid "WooCommerce Order Export"
+msgstr "WooCommerce pour l'exportation"
+
+#: lib/order-export.php:105
+msgid "Please choose settings for order export."
+msgstr "Se il vous plaît choisir les paramètres pour l'exportation afin"
+
+#: lib/order-export.php:116
+msgid "Items Purchased"
+msgstr "Les articles achetés"
+
+#: lib/order-export.php:118
+msgid "Export product details."
+msgstr "Les détails du produit d'exportation"
+
+#: lib/order-export.php:123
+msgid "Amount"
+msgstr "montant"
+
+#: lib/order-export.php:125
+msgid "Amount paid by customer"
+msgstr "Montant payé par le client"
+
+#: lib/order-export.php:130
+msgid "Email"
+msgstr "Email"
+
+#: lib/order-export.php:132
+msgid "Email of customer"
+msgstr "Email de client"
+
+#: lib/order-export.php:137
+msgid "Phone"
+msgstr "téléphone"
+
+#: lib/order-export.php:139
+msgid "Phone number of customer"
+msgstr "Numéro de téléphone du client"
+
+#: lib/order-export.php:144
+msgid "Status"
+msgstr "statut"
+
+#: lib/order-export.php:171
+msgid "Select Duration and Export"
+msgstr "Sélectionner la durée et l'exportation"
+
+#: lib/order-export.php:176
+msgid "Start Date"
+msgstr "date de début"
+
+#: lib/order-export.php:180
+msgid "End Date"
+msgstr "Date de fin"
+
+#: lib/order-export.php:185
+msgid "Export Orders"
+msgstr "Commandes à l'exportation"
+
+#: lib/order-export.php:199
+msgid "Enter both dates"
+msgstr "Saisissez les deux dates"
+
+#: lib/order-export.php:203
+msgid "Invalid start date."
+msgstr "Date de début incorrecte"
+
+#: lib/order-export.php:207
+msgid "Invalid end date."
+msgstr "Date de fin incorrecte"
+
+#: lib/order-export.php:211
+msgid "Invalid request"
+msgstr "requête invalide"
+
+#: lib/order-export.php:213
+msgid "Invalid nonce."
+msgstr "nonce non valide"
+
+#: lib/order-export-process.php:47
+msgid "Unable to create csv file, upload folder not writable"
+msgstr ""
+"Impossible de créer csv, dossier de téléchargement peut ne pas être "
+"accessible en écriture"
+
+#: lib/order-export-process.php:104
+msgid "No orders for specified duration."
+msgstr "Aucune ordonnance de durée déterminée"
