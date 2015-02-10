@@ -2,9 +2,9 @@
 Contributors: ankitgadertcampcom
 Donate link: http://sharethingz.com
 Tags: woocommerce, order, export, csv, duration, woocommerce-order, woocommerce-order-export
-Requires at least: WordPress 3.9 WooCommerce 2.2.10
-Tested up to: WordPress 4.1 + WooCommerce 2.2.10
-Stable tag: 1.1.2
+Requires at least: 3.9
+Tested up to: 4.1
+Stable tag: 1.1.3
 License: GPLv2 or later (of-course)
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,3 +85,7 @@ Please use wpg_order_columns and wpg_before_csv_write hooks for performing this 
 
 = 1.1.2 =
 * Fixed script enqueue bug.
+
+= 1.1.3 =
+* Changed hooks position.
+* Order object passed as parameter to wpg_before_csv_write hook.

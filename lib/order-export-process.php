@@ -16,7 +16,7 @@ if( !class_exists('order_export_process') ) {
 
 			foreach( $wpg_order_columns as $key=>$val ) {
 
-				$retireve = get_option( $key, 'yes' );
+				$retireve = get_option( $key, 'no' );
 				$fields[$key] = ( strtolower($retireve) === 'yes' ) ? true : false;
 			}
 			
@@ -100,7 +100,7 @@ if( !class_exists('order_export_process') ) {
 					 * Perform some action before writing to csv.
 					 * Callback functions hooked to this action should accept a reference pointer to $csv_values.
 					 */
-					do_action_ref_array( 'wpg_before_csv_write', array( &$csv_values ) );
+					do_action_ref_array( 'wpg_before_csv_write', array( &$csv_values, $order_details ) );
 
 					fputcsv( $csv_file, $csv_values );
 				}
