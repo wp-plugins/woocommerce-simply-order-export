@@ -58,20 +58,16 @@ Please use wpg_order_columns and wpg_before_csv_write hooks for performing this 
 
 == Changelog ==
 
-= 1.0.0 =
-* First release.
+= 1.1.3 =
+* Changed hooks position.
+* Order object passed as parameter to wpg_before_csv_write hook.
 
-= 1.0.1 =
-* Added 'wpg_order_statuses' hook to filter post status in export query.
+= 1.1.2 =
+* Fixed script enqueue bug.
 
-= 1.0.2 =
-* Added nonce to export request to make it more secure.
-* Renamed file order_export_process to order-export-process.
-* Check for ABSPATH constant at start of files to avoid data leaks.
-* Check for WooCommerce installation in main plugin file.
-
-= 1.0.3 =
-* Fixed "invalid request" js error.
+= 1.1.1 =
+* Added advanced options in settings page.
+* UI improvements.
 
 = 1.1.0 =
 * Fixed Phone number export bug.
@@ -79,13 +75,17 @@ Please use wpg_order_columns and wpg_before_csv_write hooks for performing this 
 * Main file changed to class based structure.
 * Added po file for translation contribution.
 
-= 1.1.1 =
-* Added advanced options in settings page.
-* UI improvements.
+= 1.0.3 =
+* Fixed "invalid request" js error.
 
-= 1.1.2 =
-* Fixed script enqueue bug.
+= 1.0.2 =
+* Added nonce to export request to make it more secure.
+* Renamed file order_export_process to order-export-process.
+* Check for ABSPATH constant at start of files to avoid data leaks.
+* Check for WooCommerce installation in main plugin file.
 
-= 1.1.3 =
-* Changed hooks position.
-* Order object passed as parameter to wpg_before_csv_write hook.
+= 1.0.1 =
+* Added 'wpg_order_statuses' hook to filter post status in export query.
+
+= 1.0.0 =
+* First release.
