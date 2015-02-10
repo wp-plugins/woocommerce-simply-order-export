@@ -100,7 +100,7 @@ if( !class_exists('order_export_process') ) {
 					 * Perform some action before writing to csv.
 					 * Callback functions hooked to this action should accept a reference pointer to $csv_values.
 					 */
-					do_action_ref_array( 'wpg_before_csv_write', array( &$csv_values, $order_details ) );
+					do_action_ref_array( 'wpg_before_csv_write', array( &$csv_values, $order_details, $fields ) );
 
 					fputcsv( $csv_file, $csv_values );
 				}
