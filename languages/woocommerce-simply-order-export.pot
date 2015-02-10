@@ -1,0 +1,204 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Simply Order Export\n"
+"POT-Creation-Date: 2015-02-09 07:52+0530\n"
+"PO-Revision-Date: 2015-02-09 07:55+0530\n"
+"Last-Translator: \n"
+"Language-Team: wpgeeko <alnobody70@gmail.com>\n"
+"Language: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: lib\n"
+
+#: main.php:92 lib/order-export.php:110 lib/order-export.php:112
+msgid "Customer Name"
+msgstr ""
+
+#: main.php:93
+msgid "Product Information"
+msgstr ""
+
+#: main.php:94
+msgid "Order Amount ( $ )"
+msgstr ""
+
+#: main.php:95
+msgid "Customer Email"
+msgstr ""
+
+#: main.php:96
+msgid "Phone Number"
+msgstr ""
+
+#: main.php:97 lib/order-export.php:147 lib/order-export.php:154
+msgid "Order Status"
+msgstr ""
+
+#: lib/order-export.php:61
+msgid "Order Export"
+msgstr ""
+
+#: lib/order-export.php:98
+msgid "WooCommerce Order Export"
+msgstr ""
+
+#: lib/order-export.php:106
+msgid "Please choose settings for order export."
+msgstr ""
+
+#: lib/order-export.php:117
+msgid "Items Purchased"
+msgstr ""
+
+#: lib/order-export.php:119
+msgid "Export product details."
+msgstr ""
+
+#: lib/order-export.php:124
+msgid "Amount"
+msgstr ""
+
+#: lib/order-export.php:126
+msgid "Amount paid by customer"
+msgstr ""
+
+#: lib/order-export.php:131
+msgid "Email"
+msgstr ""
+
+#: lib/order-export.php:133
+msgid "Email of customer"
+msgstr ""
+
+#: lib/order-export.php:138
+msgid "Phone"
+msgstr ""
+
+#: lib/order-export.php:140
+msgid "Phone number of customer"
+msgstr ""
+
+#: lib/order-export.php:145
+msgid "Status"
+msgstr ""
+
+#: lib/order-export.php:152
+msgid "Advanced Options"
+msgstr ""
+
+#: lib/order-export.php:178
+msgid "Select Duration and Export"
+msgstr ""
+
+#: lib/order-export.php:183
+msgid "Start Date"
+msgstr ""
+
+#: lib/order-export.php:187
+msgid "End Date"
+msgstr ""
+
+#: lib/order-export.php:192
+msgid "Export Orders"
+msgstr ""
+
+#: lib/order-export.php:208
+msgid "Click to see advanced options"
+msgstr ""
+
+#: lib/order-export.php:208
+msgid "Advanced options"
+msgstr ""
+
+#: lib/order-export.php:209
+msgid "These are one time use options and will not be saved."
+msgstr ""
+
+#: lib/order-export.php:215
+msgid "Order Export Filename"
+msgstr ""
+
+#: lib/order-export.php:216
+msgid "This will be the downloaded csv filename"
+msgstr ""
+
+#: lib/order-export.php:218
+msgid ".csv"
+msgstr ""
+
+#: lib/order-export.php:223
+msgid "Order Statuses"
+msgstr ""
+
+#: lib/order-export.php:224
+msgid ""
+"Orders with only selected status will be exported, if none selected then all "
+"order status will be exported"
+msgstr ""
+
+#: lib/order-export.php:227
+msgid "Completed"
+msgstr ""
+
+#: lib/order-export.php:228
+msgid "Processing"
+msgstr ""
+
+#: lib/order-export.php:229
+msgid "On hold"
+msgstr ""
+
+#: lib/order-export.php:230
+msgid "Pending"
+msgstr ""
+
+#: lib/order-export.php:231
+msgid "Cancelled"
+msgstr ""
+
+#: lib/order-export.php:232
+msgid "Refunded"
+msgstr ""
+
+#: lib/order-export.php:233
+msgid "Failed"
+msgstr ""
+
+#: lib/order-export.php:250
+msgid "Enter both dates"
+msgstr ""
+
+#: lib/order-export.php:254
+msgid "Invalid start date."
+msgstr ""
+
+#: lib/order-export.php:258
+msgid "Invalid end date."
+msgstr ""
+
+#: lib/order-export.php:262
+msgid "Invalid request"
+msgstr ""
+
+#: lib/order-export.php:264
+msgid "Invalid nonce."
+msgstr ""
+
+#: lib/order-export.php:268
+msgid ""
+"Invalid CSV filename. Only letters, numbers, dashes and underscore are "
+"allowed."
+msgstr ""
+
+#: lib/order-export-process.php:50
+msgid "Unable to create csv file, upload folder not writable"
+msgstr ""
+
+#: lib/order-export-process.php:111
+msgid "No orders for specified duration."
+msgstr ""
