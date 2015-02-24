@@ -19,7 +19,7 @@ if( !class_exists( 'wpg_order_export' ) ){
 			add_action( 'woocommerce_admin_field_advanced_options', array($this, 'advanced_options') );
 			add_action( 'admin_enqueue_scripts', array($this, 'scripts') );
 			add_action( 'woocommerce_settings_wc_settings_tab_orderexport_section_end_after', array($this, 'section_end'), 999 );
-			
+
 			add_action('wp_ajax_wpg_order_export', array($this, 'wpg_order_export'));
 			add_action('wp_ajax_nopriv_wpg_order_export', array($this, 'wpg_order_export'));
 			add_action( 'admin_init' , array( $this, 'oe_download' ) );
@@ -33,7 +33,7 @@ if( !class_exists( 'wpg_order_export' ) ){
 			global $wpg_order_columns;
 
 			foreach( $wpg_order_columns as $key=>$val ){
-				
+
 				$option = get_option( $key, null );
 				if( empty( $option ) ) {
 					update_option($key, 'yes');
@@ -146,22 +146,26 @@ if( !class_exists( 'wpg_order_export' ) ){
 					'type' => 'checkbox',
 					'desc' => __( 'Order Status', 'woocommerce-simply-order-export' ),
 					'id'   => 'wc_settings_tab_order_status'
-				),			
-
-				'advanced_options' => array(
-					'name' => __( 'Advanced Options', 'woocommerce-simply-order-export' ),
-					'type' => 'advanced_options',
-					'desc' => __( 'Order Status', 'woocommerce-simply-order-export' )
-				),
-
-				'orderexport_section_end' => array(
-					 'type' => 'sectionend',
-					 'id' => 'wc_settings_tab_orderexport_section_end'
 				)
-
 			);
 
-			return apply_filters( 'wc_settings_tab_order_export', $settings );
+			/**
+			 * Add more fields to plugin
+			 */
+			$settings = apply_filters( 'wc_settings_tab_order_export', $settings );
+
+			$settings['advanced_options'] = array(
+											'name' => __( 'Advanced Options', 'woocommerce-simply-order-export' ),
+											'type' => 'advanced_options',
+											'desc' => __( 'Order Status', 'woocommerce-simply-order-export' )
+											);
+
+			$settings['orderexport_section_end'] = array(
+													'type' => 'sectionend',
+													'id' => 'wc_settings_tab_orderexport_section_end'
+												);
+
+			return $settings;
 		}
 
 		/**

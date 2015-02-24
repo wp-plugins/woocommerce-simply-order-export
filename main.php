@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WooCommerce Simply Order Export
  * Description: Downloads order details in csv format
- * Version: 1.1.2
+ * Version: 1.1.3
  * Author: Ankit Gade
  * Author URI: http://sharethingz.com
  * License: GPL2
@@ -22,7 +22,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		/**
 		 * @var string
 		 */
-		public $version = '1.1.2';
+		public $version = '1.1.3';
 
 		/**
 		 * Constructor
@@ -33,12 +33,8 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			 * Fires this function when plugin gets activated.
 			 */
 			register_activation_hook( __FILE__, array( __CLASS__, 'install' ) );
-
 			$this->define_constants();
-			$this->set_variables();
 			$this->includes();
-			$this->instantiate();
-			
 			add_action( 'init', array($this, 'init') );
 		}
 		
@@ -46,8 +42,10 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		 * Fires at 'init' hook
 		 */
 		function init() {
-			
+
 			$this->load_plugin_textdomain();
+			$this->set_variables();
+			$this->instantiate();
 		}
 		
 		/**
@@ -66,7 +64,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			/**
 			 * Check for valid names
 			 */
-			if( in_array( $name, array( 'wpg_order_export', 'wpg_order_columns' ) ) ){
+			if( in_array( $name, array( 'wpg_order_export', 'wpg_order_columns' ) ) ){				
 				$GLOBALS[$name] = $value;
 			}
 		}
@@ -96,7 +94,6 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 												'wc_settings_tab_order_status'=>__( 'Order Status', 'woocommerce-simply-order-export' )
 											)
 										);
-
 		}
 
 		/**
