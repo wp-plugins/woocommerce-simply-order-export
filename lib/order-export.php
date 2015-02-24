@@ -237,6 +237,19 @@ if( !class_exists( 'wpg_order_export' ) ){
 										<div class="order-statuses"><label><input type="checkbox" value="wc-failed" name="order_status[]" /><?php _e('Failed', 'woocommerce-simply-order-export') ?></label></div>
 									</td>
 								</tr>
+								
+								<tr>
+
+									<th>
+										<?php _e( 'Delimiter', 'woocommerce-simply-order-export') ?>
+										<img class="help_tip" data-tip="<?php _e('Delimiter for exported file.', 'woocommerce-simply-order-export') ?>" src="<?php echo OE_IMG; ?>help.png" height="16" width="16">
+									</th>
+
+									<td>
+										<input type="text" maxlength="1" name="wpg_delimiter" value="" />
+									</td>
+
+								</tr>
 
 							</table>
 						</div>

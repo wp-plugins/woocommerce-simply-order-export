@@ -6,6 +6,8 @@ if( !class_exists('order_export_process') ) {
 
 	class order_export_process {
 
+		static $delimiter;
+
 		/**
 		 * Tells which fields to export
 		 */
@@ -31,6 +33,15 @@ if( !class_exists('order_export_process') ) {
 			$fields		=	self::export_options();
 			$headings	=	self::csv_heading($fields);
 
+			$delimiter	=	( empty( $_POST['wpg_delimiter'] ) || ( gettype( $_POST['wpg_delimiter'] ) !== 'string' ) ) ? ',' : $_POST['wpg_delimiter'][0];
+
+			/**
+			 * Filter : wpg_delimiter
+			 * Filters the delimiter for exported csv file. Override user defined
+			 * delimiter by using this filter.
+			 */
+			self::$delimiter = apply_filters( 'wpg_delimiter', $delimiter );
+
 			/* Check which order statuses to export. */
 			$order_statuses	=	( !empty( $_POST['order_status'] ) && is_array( $_POST['order_status'] ) ) ? $_POST['order_status'] : array_keys( wc_get_order_statuses() );
 
@@ -50,7 +61,7 @@ if( !class_exists('order_export_process') ) {
 					return new WP_Error( 'not_writable', __( 'Unable to create csv file, upload folder not writable', 'woocommerce-simply-order-export' ) );
 				}
 
-				fputcsv( $csv_file, $headings );
+				fputcsv( $csv_file, $headings, self::$delimiter );
 
 				while( $orders->have_posts() ) {
 
@@ -102,7 +113,7 @@ if( !class_exists('order_export_process') ) {
 					 */
 					do_action_ref_array( 'wpg_before_csv_write', array( &$csv_values, $order_details, $fields ) );
 
-					fputcsv( $csv_file, $csv_values );
+					fputcsv( $csv_file, $csv_values, self::$delimiter );
 				}
 				wp_reset_postdata();
 

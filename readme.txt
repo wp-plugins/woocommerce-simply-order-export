@@ -4,7 +4,7 @@ Donate link: http://sharethingz.com
 Tags: woocommerce, order, export, csv, duration, woocommerce-order, woocommerce-order-export
 Requires at least: 3.9
 Tested up to: 4.1
-Stable tag: 1.1.3
+Stable tag: 1.1.4
 License: GPLv2 or later (of-course)
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -57,6 +57,10 @@ Go to advanced options and then check statuses you want to export.
 Please use wpg_order_columns and wpg_before_csv_write hooks for performing this activity. Little WordPress programming knowledge is necessary for accomplishing this.
 
 == Changelog ==
+
+= 1.1.4 =
+* Added custom delimiter option.
+* wpg_delimiter filter to override user-defined delimiter.
 
 = 1.1.3 =
 * Changed hooks position.
