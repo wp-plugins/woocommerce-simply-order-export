@@ -145,28 +145,75 @@ if( !class_exists('order_export_process') ) {
 			if( !is_a( $order_details, 'WC_Order' ) ){
 				return '';
 			}
-			
+
+			global $wpdb;
+
 			$items_list = array();
-			
 			$items = $order_details->get_items();
-			
+
 			if ( !empty( $items ) ) {
-				
-				foreach( $items as $item ) {
-					
+
+				foreach( $items as $key=>$item ) {
+
+					$metadata = $order_details->has_meta( $key );
+					$exclude_meta = apply_filters( 'woocommerce_hidden_order_itemmeta', array(
+							'_qty',
+							'_tax_class',
+							'_product_id',
+							'_variation_id',
+							'_line_subtotal',
+							'_line_subtotal_tax',
+							'_line_total',
+							'_line_tax',
+						) );
+
 					$item_name = (string)$item['qty']. ' '.$item['name'];
 					
-					if( !empty( $item['variation_id'] ) ) {
-						$variation_data = new WC_Product_Variation( $item['variation_id']);
-						$variation_detail = woocommerce_get_formatted_variation( $variation_data->variation_data, true );
+					$variation_details = array();
+
+					foreach( $metadata as $k => $meta ) {
+
+						if( in_array( $meta['meta_key'], $exclude_meta ) ){
+							continue;
+						}
+
+						// Skip serialised meta
+						if ( is_serialized( $meta['meta_value'] ) ) {
+							continue;
+						}
 						
-						$item_name .= ' ( '.$variation_detail.' )';
+						// Get attribute data
+						if ( taxonomy_exists( $meta['meta_key'] ) ) {
+
+							$term           = get_term_by( 'slug', $meta['meta_value'], $meta['meta_key'] );
+							$attribute_name = str_replace( 'pa_', '', wc_clean( $meta['meta_key'] ) );
+							$attribute      = $wpdb->get_var(
+								$wpdb->prepare( "
+										SELECT attribute_label
+										FROM {$wpdb->prefix}woocommerce_attribute_taxonomies
+										WHERE attribute_name = %s;
+									",
+									$attribute_name
+								)
+							);
+
+							$meta['meta_key']   = ( ! is_wp_error( $attribute ) && $attribute ) ? $attribute : $attribute_name;
+							$meta['meta_value'] = ( isset( $term->name ) ) ? $term->name : $meta['meta_value'];
+							
+							array_push( $variation_details, wp_kses_post( urldecode( $meta['meta_key'] ) ) .': '.wp_kses_post( urldecode( $meta['meta_value'] ) ) );
+						}
+
 					}
-					
+
+					if( !empty( $variation_details ) ) {
+						$variation_details = implode( ', ', $variation_details );
+						$item_name .= '( '. $variation_details .' )';
+					}
+
 					array_push($items_list, $item_name);
 				}
 			}
-			
+
 			return $items_list = implode( ', ', $items_list);
 		}
 
@@ -176,7 +223,7 @@ if( !class_exists('order_export_process') ) {
 		 * @return string
 		 */
 		static function customer_name( $order_id ) {
-			
+
 			if( empty( $order_id ) ){
 				return '';
 			}
