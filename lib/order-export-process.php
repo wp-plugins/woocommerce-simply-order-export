@@ -166,10 +166,11 @@ if( !class_exists('order_export_process') ) {
 							'_line_total',
 							'_line_tax',
 						) );
-
+					
 					$item_name = (string)$item['qty']. ' '.$item['name'];
 					
 					$variation_details = array();
+
 
 					foreach( $metadata as $k => $meta ) {
 
@@ -183,26 +184,17 @@ if( !class_exists('order_export_process') ) {
 						}
 						
 						// Get attribute data
-						if ( taxonomy_exists( $meta['meta_key'] ) ) {
+						if ( taxonomy_exists( wc_sanitize_taxonomy_name( $meta['meta_key'] ) ) ) {
 
-							$term           = get_term_by( 'slug', $meta['meta_value'], $meta['meta_key'] );
-							$attribute_name = str_replace( 'pa_', '', wc_clean( $meta['meta_key'] ) );
-							$attribute      = $wpdb->get_var(
-								$wpdb->prepare( "
-										SELECT attribute_label
-										FROM {$wpdb->prefix}woocommerce_attribute_taxonomies
-										WHERE attribute_name = %s;
-									",
-									$attribute_name
-								)
-							);
-
-							$meta['meta_key']   = ( ! is_wp_error( $attribute ) && $attribute ) ? $attribute : $attribute_name;
-							$meta['meta_value'] = ( isset( $term->name ) ) ? $term->name : $meta['meta_value'];
-							
-							array_push( $variation_details, wp_kses_post( urldecode( $meta['meta_key'] ) ) .': '.wp_kses_post( urldecode( $meta['meta_value'] ) ) );
+							$term               = get_term_by( 'slug', $meta['meta_value'], wc_sanitize_taxonomy_name( $meta['meta_key'] ) );
+							$meta['meta_key']   = wc_attribute_label( wc_sanitize_taxonomy_name( $meta['meta_key'] ) );
+							$meta['meta_value'] = isset( $term->name ) ? $term->name : $meta['meta_value'];
+							//array_push( $variation_details, wp_kses_post( urldecode( $meta['meta_key'] ) ) .': '.wp_kses_post( urldecode( $meta['meta_value'] ) ) );
+						}else {
+							$meta['meta_key']   = apply_filters( 'woocommerce_attribute_label', wc_attribute_label( $meta['meta_key'], $_product ), $meta['meta_key'] );
 						}
 
+						array_push( $variation_details, wp_kses_post( urldecode( $meta['meta_key'] ) ) .': '.wp_kses_post( urldecode( $meta['meta_value'] ) ) );
 					}
 
 					if( !empty( $variation_details ) ) {
@@ -213,7 +205,7 @@ if( !class_exists('order_export_process') ) {
 					array_push($items_list, $item_name);
 				}
 			}
-
+			
 			return $items_list = implode( ', ', $items_list);
 		}
 
