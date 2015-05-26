@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WooCommerce Simply Order Export
  * Description: Downloads order details in csv format
- * Version: 1.1.6
+ * Version: 1.2.0
  * Author: Ankit Gade
  * Author URI: http://sharethingz.com
  * License: GPL2
@@ -22,7 +22,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		/**
 		 * @var string
 		 */
-		public $version = '1.1.6';
+		public $version = '1.2.0';
 
 		/**
 		 * Constructor
@@ -37,7 +37,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			$this->includes();
 			add_action( 'init', array($this, 'init') );
 		}
-		
+
 		/**
 		 * Fires at 'init' hook
 		 */
@@ -47,7 +47,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			$this->set_variables();
 			$this->instantiate();
 		}
-		
+
 		/**
 		 * Load locale
 		 */
@@ -79,13 +79,14 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			define( 'OE_JS',  OE_URL. "/assets/js/" );
 			define( 'OE_IMG',  OE_URL. "/assets/img/" );
 		}
-		
+
 		/**
 		 * Set necessary variables.
 		 */
 		function set_variables() {
 
 			$this->wpg_order_columns = apply_filters( 'wpg_order_columns', array(
+												'wc_settings_tab_order_id'=>__( 'Order ID', 'woocommerce-simply-order-export' ),
 												'wc_settings_tab_customer_name'=>__( 'Customer Name', 'woocommerce-simply-order-export' ),
 												'wc_settings_tab_product_info'=>__( 'Product Information', 'woocommerce-simply-order-export' ),
 												'wc_settings_tab_amount'=> __( 'Order Amount ( $ )', 'woocommerce-simply-order-export' ),
@@ -110,16 +111,20 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		 * Runs when plugin is activated.
 		 */
 		function install() {
+			
+			ob_start();
 
 			global $wpg_order_columns;
 
 			foreach( $wpg_order_columns as $key=>$val ){
-				
+
 				$option = get_option( $key, null );
 				if( empty( $option ) ) {
 					update_option($key, 'yes');
 				}
 			}
+			
+			ob_end_clean();
 		}
 
 		/**

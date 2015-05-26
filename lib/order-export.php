@@ -1,6 +1,8 @@
 <?php
 
-if( !defined('ABSPATH') ) exit;
+if( !defined('ABSPATH') ) {
+	exit;
+}
 
 if( !class_exists( 'wpg_order_export' ) ){
 
@@ -21,7 +23,7 @@ if( !class_exists( 'wpg_order_export' ) ){
 			add_action( 'woocommerce_settings_wc_settings_tab_orderexport_section_end_after', array($this, 'section_end'), 999 );
 
 			add_action('wp_ajax_wpg_order_export', array($this, 'wpg_order_export'));
-			add_action('wp_ajax_nopriv_wpg_order_export', array($this, 'wpg_order_export'));
+			//add_action('wp_ajax_nopriv_wpg_order_export', array($this, 'wpg_order_export'));
 			add_action( 'admin_init' , array( $this, 'oe_download' ) );
 		}
 
@@ -46,6 +48,7 @@ if( !class_exists( 'wpg_order_export' ) ){
 			if(  (!empty( $_GET['tab'] )&& $_GET['tab'] === 'order_export') ) {
 				wp_enqueue_script('jquery-ui-datepicker');
 				wp_enqueue_style('jquery-ui-datepicker');
+				wp_enqueue_script('jquery-ui-sortable');
 				wp_enqueue_style('wpg-style', OE_CSS.'style.css');
 				wp_enqueue_script( 'order-export', OE_JS. 'orderexport.js', array('jquery','jquery-ui-datepicker'), false, true );
 			}
@@ -84,13 +87,10 @@ if( !class_exists( 'wpg_order_export' ) ){
 			woocommerce_update_options( $this->get_settings() );
 		}
 
-
 		/**
-		 * Get all the settings for this plugin for @see woocommerce_admin_fields() function.
-		 *
-		 * @return array Array of settings for @see woocommerce_admin_fields() function.
+		 * Returns settings fields.
 		 */
-		public function get_settings() {
+		static function get_settings_fields() {
 
 			$settings = array(
 
@@ -104,6 +104,13 @@ if( !class_exists( 'wpg_order_export' ) ){
 				'short_desc' => array(
 					'type'     => 'short_desc',
 					'desc'     => __( 'Please choose settings for order export.', 'woocommerce-simply-order-export' ),
+				),
+
+				'order_id' => array(
+					'name' => __( 'Order ID', 'woocommerce-simply-order-export' ),
+					'type' => 'checkbox',
+					'desc' => __( 'Order ID', 'woocommerce-simply-order-export' ),
+					'id'   => 'wc_settings_tab_order_id'
 				),
 
 				'customer_name' => array(
@@ -150,9 +157,23 @@ if( !class_exists( 'wpg_order_export' ) ){
 			);
 
 			/**
-			 * Add more fields to plugin
+			 * Add more fields to plugin.
+			 * Also you can use this filter to change settings fields order.
 			 */
-			$settings = apply_filters( 'wc_settings_tab_order_export', $settings );
+			return apply_filters( 'wc_settings_tab_order_export', $settings );
+
+		}
+
+		/**
+		 * Get all the settings for this plugin for @see woocommerce_admin_fields() function.
+		 *
+		 * @return array Array of settings for @see woocommerce_admin_fields() function.
+		 */
+		public function get_settings() {
+
+			$settings = self::get_settings_fields();
+
+			$settings = apply_filters( 'wpg_before_advanced_options', $settings );
 
 			$settings['advanced_options'] = array(
 											'name' => __( 'Advanced Options', 'woocommerce-simply-order-export' ),
@@ -213,6 +234,8 @@ if( !class_exists( 'wpg_order_export' ) ){
 						<p><span style="font-style: italic;"><?php _e( 'These are one time use options and will not be saved.', 'woocommerce-simply-order-export' ) ?></span></p>
 						<div class="woo-soe-advanced" style="display: none;">
 							<table>
+								
+								<?php do_action( 'advanced_options_begin' ) ?>
 
 								<tr>
 									<th>
@@ -250,6 +273,8 @@ if( !class_exists( 'wpg_order_export' ) ){
 									</td>
 
 								</tr>
+								
+								<?php do_action( 'advanced_options_end' ) ?>
 
 							</table>
 						</div>
@@ -342,7 +367,7 @@ if( !class_exists( 'wpg_order_export' ) ){
             $filename   =   $upload_dir['basedir']. '/order_export.csv';
 			$download_filename = empty($_GET['filename']) ?  'order_export' : $_GET['filename'];
 
-            if( !empty( $_GET['oe'] ) && file_exists( $filename ) && current_user_can('manage_options') ){
+            if( !empty( $_GET['oe'] ) && file_exists( $filename ) && current_user_can('manage_woocommerce') ){
 
                 $file = fopen( $filename, 'r' );
                 $contents = fread($file, filesize($filename));

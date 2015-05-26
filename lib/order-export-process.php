@@ -1,6 +1,8 @@
 <?php
 
-if( !defined('ABSPATH') ) exit;
+if( !defined('ABSPATH') ) {
+	exit;
+}
 
 if( !class_exists('order_export_process') ) {
 
@@ -9,19 +11,55 @@ if( !class_exists('order_export_process') ) {
 		static $delimiter;
 
 		/**
-		 * Tells which fields to export
+		 * Tells which fields to export.
+		 * 
+		 * Also reset orders of fields according to which they were added
+		 * in plugin.
+		 * 
+		 * Refer this support link: https://wordpress.org/support/topic/change-order-5?replies=7#post-6818741
 		 */
 		static function export_options() {
 
 			global $wpg_order_columns;
+
+			$settings = wpg_order_export::get_settings_fields();
+			$settings = apply_filters( 'wpg_export_options_settings', $settings );
+
 			$fields = array();
+
+			$setting_order = array();
+
+			if( is_array( $settings ) ) {
+
+				foreach( $settings as $setting ) {
+
+					if( !is_array( $setting ) || empty($setting['id']) ){
+						continue;
+					}
+
+					array_push( $setting_order, $setting['id'] );
+				}
+
+				$new_order = array();
+
+				foreach( $setting_order as $_setting ) {
+
+					if( empty( $wpg_order_columns[$_setting] ) ){
+						continue;
+					}
+
+					$new_order[$_setting] = $wpg_order_columns[$_setting];
+				}
+				
+				$wpg_order_columns = $new_order;
+			}
 
 			foreach( $wpg_order_columns as $key=>$val ) {
 
 				$retireve = get_option( $key, 'no' );
 				$fields[$key] = ( strtolower($retireve) === 'yes' ) ? true : false;
 			}
-			
+
 			return $fields;
 		}
 
@@ -31,6 +69,7 @@ if( !class_exists('order_export_process') ) {
 		static function get_orders() {
 
 			$fields		=	self::export_options();
+			$fields		=	array_filter( $fields, 'wpg_array_filter' );
 			$headings	=	self::csv_heading($fields);
 
 			$delimiter	=	( empty( $_POST['wpg_delimiter'] ) || ( gettype( $_POST['wpg_delimiter'] ) !== 'string' ) ) ? ',' : $_POST['wpg_delimiter'][0];
@@ -56,7 +95,7 @@ if( !class_exists('order_export_process') ) {
 				 * This will be file pointer
 				 */
 				$csv_file = self::create_csv_file();
-				
+
 				if( empty($csv_file) ) {
 					return new WP_Error( 'not_writable', __( 'Unable to create csv file, upload folder not writable', 'woocommerce-simply-order-export' ) );
 				}
@@ -70,41 +109,73 @@ if( !class_exists('order_export_process') ) {
 					$orders->the_post();
 					$order_details = new WC_Order( get_the_ID() );
 
-					/**
-					 * Check if we need customer name.
-					 */
-					if( !empty( $fields['wc_settings_tab_customer_name'] ) && $fields['wc_settings_tab_customer_name'] === true )
-						array_push( $csv_values, self::customer_name( get_the_ID() ) );
+					foreach( $fields as $key =>$field ) {
 
-					/**
-					 * Check if we need product info.
-					 */
-					if( !empty( $fields['wc_settings_tab_product_info'] ) && $fields['wc_settings_tab_product_info'] === true )
-						array_push( $csv_values, self::product_info( $order_details ) );
+						switch ( $key ) {
 
-					/**
-					 * Check if we need order amount.
-					 */
-					if( !empty( $fields['wc_settings_tab_amount'] ) && $fields['wc_settings_tab_amount'] === true )
-						array_push( $csv_values, $order_details->get_total() );
+							/**
+							 * Check if we need order ID.
+							 */
+							case 'wc_settings_tab_order_id':
+								array_push( $csv_values, $order_details->id );
+							break;
 
-					/**
-					 * Check if we need customer email.
-					 */
-					if( !empty( $fields['wc_settings_tab_customer_email'] ) && $fields['wc_settings_tab_customer_email'] === true )
-						array_push( $csv_values, self::customer_meta( get_the_ID(), '_billing_email' ) );
+							/**
+							 * Check if we need customer name.
+							 */
+							case 'wc_settings_tab_customer_name':
+								array_push( $csv_values, self::customer_name( get_the_ID() ) );
+								break;
+							
+							/**
+							 * Check if we need product info.
+							 */
+							case 'wc_settings_tab_product_info':
+								array_push( $csv_values, self::product_info( $order_details ) );
+								break;
 
-					/**
-					 * Check if we need customer phone.
-					 */
-					if( !empty( $fields['wc_settings_tab_customer_phone'] ) && $fields['wc_settings_tab_customer_phone'] === true )
-						array_push( $csv_values, self::customer_meta( get_the_ID(), '_billing_phone' ) );
+							/**
+							 * Check if we need order amount.
+							 */
+							case 'wc_settings_tab_amount':
+								array_push( $csv_values, $order_details->get_total() );
+								break;
+							
+							/**
+							 * Check if we need customer email.
+							 */
+							case 'wc_settings_tab_customer_email':
+								array_push( $csv_values, self::customer_meta( get_the_ID(), '_billing_email' ) );
+								break;
 
-					/**
-					 * Check if we need order status.
-					 */
-					if( !empty( $fields['wc_settings_tab_order_status'] ) && $fields['wc_settings_tab_order_status'] === true ){
-						array_push( $csv_values, ucwords($order_details->get_status()) );
+							/**
+							 * Check if we need customer phone.
+							 */
+							case 'wc_settings_tab_customer_phone':
+								array_push( $csv_values, self::customer_meta( get_the_ID(), '_billing_phone' ) );
+								break;
+
+							/**
+							 * Check if we need order status.
+							 */
+							case 'wc_settings_tab_order_status':
+								array_push( $csv_values, ucwords($order_details->get_status()) );
+								break;
+
+							default :
+								/**
+								 * Add values to CSV.
+								 * 
+								 * @param array $csv_values Array of csv values, callback function should accept this argument by reference.
+								 * 
+								 * @param Object $order_details WC_Order object
+								 * 
+								 * @param String $key Current key in loop.
+								 * 
+								 */
+								do_action_ref_array( 'wpg_add_values_to_csv', array( &$csv_values, $order_details, $key ) );
+								break;
+						}
 					}
 
 					/**
@@ -114,6 +185,7 @@ if( !class_exists('order_export_process') ) {
 					do_action_ref_array( 'wpg_before_csv_write', array( &$csv_values, $order_details, $fields ) );
 
 					fputcsv( $csv_file, $csv_values, self::$delimiter );
+					
 				}
 				wp_reset_postdata();
 

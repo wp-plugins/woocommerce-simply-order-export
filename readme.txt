@@ -2,9 +2,9 @@
 Contributors: ankitgadertcampcom
 Donate link: http://sharethingz.com
 Tags: woocommerce, order, export, csv, duration, woocommerce-order, woocommerce-order-export
-Requires at least: 3.9
-Tested up to: 4.1
-Stable tag: 1.1.6
+Requires at least: 4.0
+Tested up to: 4.2.2
+Stable tag: 1.2.0
 License: GPLv2 or later (of-course)
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,6 +29,12 @@ You can add more fields to export and extend the functionality by using hooks. I
 * Very lighweight code.
 * Translation ready code.
 * Contribution in translating plugin to different languages is strongly encouraged.
+
+= Features in WooCommerce Simply Order Export Add-on =
+
+* All fields related to order
+* Capability to reorder fields.
+* Reordering of fields in exported csv.
 
 == Installation ==
 Install WooCommerce Simply Order Export from the 'Plugins' section in your dashboard (Plugins > Add New > Search for WooCommerce Simply Order Export ).
@@ -57,6 +63,10 @@ Go to advanced options and then check statuses you want to export.
 Please use wpg_order_columns and wpg_before_csv_write hooks for performing this activity. Little WordPress programming knowledge is necessary for accomplishing this.
 
 == Changelog ==
+
+= 1.2.0 =
+* Fixed capability issue to download csv. Given manage_woocommerce capability.
+* Added support for wsoe add-on.
 
 = 1.1.6 =
 * Fixed variation issue for WooCommerce 2.3.7.
