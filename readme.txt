@@ -36,7 +36,7 @@ You can add more fields to export and extend the functionality by using hooks. I
 * Capability to reorder fields.
 * Reordering of fields in exported csv.
 
-> ** Purchase Add-on**
+> **Purchase Add-on**
 >
 > Get your WooCommerce Simply Order Export Add-on from [this link](http://sharethingz.com/woocommerce-simply-order-export-add-on/)
 
