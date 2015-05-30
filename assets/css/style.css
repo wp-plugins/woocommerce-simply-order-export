@@ -1,0 +1,16 @@
+.wpg-inputs { margin-top: 50px; }
+.wpg-dateholder { display: inline-block; margin-left: 25px; }
+	.wpg-dateholder:first-child { margin-left: 0; }
+.wpg-dateholder label, .wpg-dateholder .wpg-datepicker { vertical-align: middle; }
+.wpg-dateholder label { font-weight: 700; font-style: italic; }
+.orderexport-button { margin-top: 30px; }
+.orderexport-button .spinner { float: none; }
+.wpg-error { padding: 5px 10px;background: #FFF;border-left: 5px solid red; }
+#woo-soe-advanced { font-size: 1.1em; }
+	#woo-soe-advanced:hover { border-bottom: 1px solid #0074a2; }
+.woo-soe .order-statuses { margin-top: 10px; }
+
+/* Add-on css */
+#wpg-reorder { background: #C3C0A3; padding: 1em; }
+.reorder-section { border: 1px solid #333; padding: 10px; margin-top: 20px; }
+#wpg-reorder .wpg-reorder-button { margin-bottom: 10px; }
