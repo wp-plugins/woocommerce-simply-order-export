@@ -68,8 +68,8 @@ Please use wpg_order_columns and wpg_before_csv_write hooks for performing this 
 
 == Changelog ==
 
-= 1.2.0 =
-* Added dismissible notice for Order Export Add-On.
+= 1.2.1 =
+* Added dismissible notice for WooCommerce Simply Order Export Add-On.
 
 = 1.2.0 =
 * Fixed capability issue to download csv. Given manage_woocommerce capability.
