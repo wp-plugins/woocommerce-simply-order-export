@@ -4,7 +4,7 @@ Donate link: http://sharethingz.com
 Tags: woocommerce, order, export, csv, duration, woocommerce-order, woocommerce-order-export
 Requires at least: 4.0
 Tested up to: 4.2.2
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 License: GPLv2 or later (of-course)
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,9 +32,13 @@ You can add more fields to export and extend the functionality by using hooks. I
 
 = Features in WooCommerce Simply Order Export Add-on =
 
-* All fields related to order
+* All fields related to order.
 * Capability to reorder fields.
 * Reordering of fields in exported csv.
+
+> ** Purchase Add-on**
+>
+> Get your WooCommerce Simply Order Export Add-on from [this link](http://sharethingz.com/woocommerce-simply-order-export-add-on/)
 
 == Installation ==
 Install WooCommerce Simply Order Export from the 'Plugins' section in your dashboard (Plugins > Add New > Search for WooCommerce Simply Order Export ).

@@ -14,3 +14,7 @@
 #wpg-reorder { background: #C3C0A3; padding: 1em; }
 .reorder-section { border: 1px solid #333; padding: 10px; margin-top: 20px; }
 #wpg-reorder .wpg-reorder-button { margin-bottom: 10px; }
+
+/*Admin Notice*/
+.wsoe-que div { margin: 5px 0; }
+	.wsoe-que div:first-child { margin-top: 0 }

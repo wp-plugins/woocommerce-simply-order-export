@@ -49,9 +49,10 @@ if( !class_exists( 'wpg_order_export' ) ){
 				wp_enqueue_script('jquery-ui-datepicker');
 				wp_enqueue_style('jquery-ui-datepicker');
 				wp_enqueue_script('jquery-ui-sortable');
-				wp_enqueue_style('wpg-style', OE_CSS.'style.css');
 				wp_enqueue_script( 'order-export', OE_JS. 'orderexport.js', array('jquery','jquery-ui-datepicker'), false, true );
 			}
+			
+			wp_enqueue_style('wpg-style', OE_CSS.'style.css');
 		}
 
 		/**

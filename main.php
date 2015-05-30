@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WooCommerce Simply Order Export
  * Description: Downloads order details in csv format
- * Version: 1.2.0
+ * Version: 1.2.1
  * Author: Ankit Gade
  * Author URI: http://sharethingz.com
  * License: GPL2
@@ -22,7 +22,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		/**
 		 * @var string
 		 */
-		public $version = '1.2.0';
+		public $version = '1.2.1';
 
 		/**
 		 * Constructor
@@ -111,7 +111,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		 * Runs when plugin is activated.
 		 */
 		function install() {
-			
+
 			ob_start();
 
 			global $wpg_order_columns;
@@ -123,7 +123,8 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 					update_option($key, 'yes');
 				}
 			}
-			
+
+			wsoe_call_notices_func();
 			ob_end_clean();
 		}
 
