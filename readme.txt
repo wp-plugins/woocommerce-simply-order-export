@@ -39,6 +39,7 @@ You can add more fields to export and extend the functionality by using hooks. I
 > **Purchase Add-on**
 >
 > Get your WooCommerce Simply Order Export Add-on from [this link](http://sharethingz.com/woocommerce-simply-order-export-add-on/)
+> Documentation of this add-on is present at [WooCommerce Simply Order Export Add-on Documentation](https://github.com/ankitrox/WooCommerce-Simply-Order-Export-Add-on-Doc/blob/master/README.md)
 
 == Installation ==
 Install WooCommerce Simply Order Export from the 'Plugins' section in your dashboard (Plugins > Add New > Search for WooCommerce Simply Order Export ).
