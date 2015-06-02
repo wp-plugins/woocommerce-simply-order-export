@@ -87,6 +87,8 @@ if( !class_exists('order_export_process') ) {
 			$args = array( 'post_type'=>'shop_order', 'posts_per_page'=>-1, 'post_status'=> apply_filters( 'wpg_order_statuses', $order_statuses ) );
 			$args['date_query'] = array( array( 'after'=>  filter_input( INPUT_POST, 'start_date', FILTER_DEFAULT ), 'before'=> filter_input( INPUT_POST, 'end_date', FILTER_DEFAULT ), 'inclusive' => true ) );
 
+			$args = apply_filters( 'wsoe_query_args', $args );
+
 			$orders = new WP_Query( $args );
 
 			if( $orders->have_posts() ) {

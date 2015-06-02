@@ -23,8 +23,8 @@ if( !class_exists( 'wpg_order_export' ) ){
 			add_action( 'woocommerce_settings_wc_settings_tab_orderexport_section_end_after', array($this, 'section_end'), 999 );
 
 			add_action('wp_ajax_wpg_order_export', array($this, 'wpg_order_export'));
-			//add_action('wp_ajax_nopriv_wpg_order_export', array($this, 'wpg_order_export'));
 			add_action( 'admin_init' , array( $this, 'oe_download' ) );
+			add_filter( 'plugin_action_links_'.WSOE_BASENAME, array($this, 'wsoe_action_links') );
 		}
 
 		/**
@@ -53,6 +53,17 @@ if( !class_exists( 'wpg_order_export' ) ){
 			}
 			
 			wp_enqueue_style('wpg-style', OE_CSS.'style.css');
+		}
+
+		/**
+		 * Add Settings link to plugins page
+		 * @param array $links array of links
+		 * @return array action links
+		 */
+		public function wsoe_action_links($links) {
+			
+			$setting_link = array('<a href="' . admin_url( 'admin.php?page=wc-settings&tab=order_export' ) . '">'.__('Settings', 'woocommerce-simply-order-export').'</a>',);
+			return array_merge($links, $setting_link);
 		}
 
 		/**
