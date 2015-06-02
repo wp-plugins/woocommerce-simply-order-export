@@ -69,6 +69,10 @@ Please use wpg_order_columns and wpg_before_csv_write hooks for performing this 
 
 == Changelog ==
 
+= 1.2.2 =
+* Added 'wsoe_query_args' filter to filter query arguments.
+* Added 'Settings' action link on plugin page, so that users can easily navigate to order export settings page.
+
 = 1.2.1 =
 * Added dismissible notice for WooCommerce Simply Order Export Add-On.
 
