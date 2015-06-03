@@ -57,7 +57,9 @@ Activate it through the 'Plugins' section.
 
 = Export button not working, any problem ? =
 
-Please check your WooCommerce version it should be at least 2.2.10 and WordPress version should be at least 3.9
+1. Please check if you have installed latest version of woocommerce along with woocommerce simply order export plugin.
+2. Deactivate all plugins except woocommerce and woocommerce simply order export plugins, switch to default theme and check if issue still persists or not?
+3. If issue persists, consider contacting [here](http://sharethingz.com/contact)
 
 = How to export orders with specific statuses ? =
 
