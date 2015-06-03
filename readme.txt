@@ -67,6 +67,8 @@ Go to advanced options and then check statuses you want to export.
 
 Please use wpg_order_columns and wpg_before_csv_write hooks for performing this activity. Little WordPress programming knowledge is necessary for accomplishing this.
 
+You can also opt for woocommerce simply order export add-on, it is available [here](http://sharethingz.com/woocommerce-simply-order-export-add-on/). It adds all the fields related to orders and allows users to reorder the fields using drag and drop interface.
+
 == Changelog ==
 
 = 1.2.2 =
