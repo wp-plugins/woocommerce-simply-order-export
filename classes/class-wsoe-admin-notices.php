@@ -39,7 +39,8 @@ if( !class_exists('wsoe_admin_notices') ) {
 		}
 
 		function install_addon() {
-			include dirname(__FILE__). '/views/html-notice-addon-support.php';
+
+			include WSOE_BASE. 'views/html-notice-addon-support.php';
 		}
 
 		function wsoe_hide_notices() {

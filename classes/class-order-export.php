@@ -4,6 +4,9 @@ if( !defined('ABSPATH') ) {
 	exit;
 }
 
+/**
+ * This class handles all the settings related WSOE plugin
+ */
 if( !class_exists( 'wpg_order_export' ) ){
 
 	class wpg_order_export {
@@ -56,12 +59,12 @@ if( !class_exists( 'wpg_order_export' ) ){
 		}
 
 		/**
-		 * Add Settings link to plugins page
+		 * Add Settings link to plugins page, this allows users to navigate to settings page directly.
 		 * @param array $links array of links
 		 * @return array action links
 		 */
 		public function wsoe_action_links($links) {
-			
+
 			$setting_link = array('<a href="' . admin_url( 'admin.php?page=wc-settings&tab=order_export' ) . '">'.__('Settings', 'woocommerce-simply-order-export').'</a>',);
 			return array_merge($links, $setting_link);
 		}
@@ -132,11 +135,25 @@ if( !class_exists( 'wpg_order_export' ) ){
 					'id'   => 'wc_settings_tab_customer_name'
 				),
 
-				'product_info' => array(
-					'name' => __( 'Items Purchased', 'woocommerce-simply-order-export' ),
+				'product_name' => array(
+					'name' => __( 'Product Name', 'woocommerce-simply-order-export' ),
 					'type' => 'checkbox',
-					'desc' => __( 'Export product details.', 'woocommerce-simply-order-export' ),
-					'id'   => 'wc_settings_tab_product_info'
+					'desc' => __( 'Name of items purchased', 'woocommerce-simply-order-export' ),
+					'id'   => 'wc_settings_tab_product_name'
+				),
+
+				'product_quantity' => array(
+					'name' => __( 'Product Quantity', 'woocommerce-simply-order-export' ),
+					'type' => 'checkbox',
+					'desc' => __( 'Quantity of items purchased', 'woocommerce-simply-order-export' ),
+					'id'   => 'wc_settings_tab_product_quantity'
+				),
+
+				'product_variation' => array(
+					'name' => __( 'Product Variation', 'woocommerce-simply-order-export' ),
+					'type' => 'checkbox',
+					'desc' => __( 'Product variation', 'woocommerce-simply-order-export' ),
+					'id'   => 'wc_settings_tab_product_variation'
 				),
 
 				'amount' => array(
@@ -303,7 +320,7 @@ if( !class_exists( 'wpg_order_export' ) ){
 			if( empty( $_POST['start_date'] ) || ( empty( $_POST['end_date'] ) ) ){
 				return new WP_Error( 'dates_empty', __( 'Enter both dates', 'woocommerce-simply-order-export' ) );
 			}
-			
+
 			if( !self::checkdate( $_POST['start_date'] ) ) {
 				return new WP_Error( 'invalid_start_date', __( 'Invalid start date.', 'woocommerce-simply-order-export' ) );
 			}

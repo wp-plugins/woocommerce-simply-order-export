@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WooCommerce Simply Order Export
  * Description: Downloads order details in csv format
- * Version: 1.2.2
+ * Version: 1.2.3
  * Author: Ankit Gade
  * Author URI: http://sharethingz.com
  * License: GPL2
@@ -12,19 +12,22 @@ if( !defined('ABSPATH') ){
 	exit;
 }
 
+
 /**
  * Check if WooCommerce is already activated.
  */
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 
 	define('WSOE_BASENAME', plugin_basename(__FILE__));
-	
+
+	define('WSOE_BASE', plugin_dir_path(__FILE__));
+
 	class WooCommerce_simply_order_export {
 
 		/**
 		 * @var string
 		 */
-		public $version = '1.2.2';
+		public $version = '1.2.3';
 
 		/**
 		 * Constructor
@@ -90,8 +93,10 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			$this->wpg_order_columns = apply_filters( 'wpg_order_columns', array(
 												'wc_settings_tab_order_id'=>__( 'Order ID', 'woocommerce-simply-order-export' ),
 												'wc_settings_tab_customer_name'=>__( 'Customer Name', 'woocommerce-simply-order-export' ),
-												'wc_settings_tab_product_info'=>__( 'Product Information', 'woocommerce-simply-order-export' ),
-												'wc_settings_tab_amount'=> __( 'Order Amount ( $ )', 'woocommerce-simply-order-export' ),
+												'wc_settings_tab_product_name'=>__( 'Product Name', 'woocommerce-simply-order-export' ),
+												'wc_settings_tab_product_quantity'=>__( 'Product Quantity', 'woocommerce-simply-order-export' ),
+												'wc_settings_tab_product_variation'=>__( 'Variation details', 'woocommerce-simply-order-export' ),
+												'wc_settings_tab_amount'=> __( 'Order Amount', 'woocommerce-simply-order-export' ),
 												'wc_settings_tab_customer_email'=> __( 'Customer Email', 'woocommerce-simply-order-export' ),
 												'wc_settings_tab_customer_phone'=>__( 'Phone Number', 'woocommerce-simply-order-export' ),
 												'wc_settings_tab_order_status'=>__( 'Order Status', 'woocommerce-simply-order-export' )
@@ -103,8 +108,8 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		 * Include helper classes
 		 */
 		function includes() {
-			// Includes PHP files located in 'lib' folder
-			foreach( glob ( dirname(__FILE__). "/lib/*.php" ) as $lib_filename ) {
+			// Includes PHP files located in 'lib' and 'classes' folder
+			foreach( array_merge( glob ( dirname(__FILE__). "/lib/*.php" ), glob ( dirname(__FILE__). "/classes/*.php" ) ) as $lib_filename ) {
 				require_once( $lib_filename );
 			}
 		}
@@ -142,4 +147,3 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
 	new WooCommerce_simply_order_export();
 }
-
