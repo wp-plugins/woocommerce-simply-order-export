@@ -39,6 +39,7 @@ You can add more fields to export and extend the functionality by using hooks. I
 > **Purchase Add-on**
 >
 > Get your WooCommerce Simply Order Export Add-on from [this link](http://sharethingz.com/woocommerce-simply-order-export-add-on/)
+>
 > Documentation of this add-on is present at [WooCommerce Simply Order Export Add-on Documentation](https://github.com/ankitrox/WooCommerce-Simply-Order-Export-Add-on-Doc/blob/master/README.md)
 
 == Installation ==
@@ -55,17 +56,21 @@ Activate it through the 'Plugins' section.
 
 == Frequently Asked Questions ==
 
-= Export button not working, any problem ? =
+= Export button not working, any problem? =
 
 1. Please check if you have installed latest version of woocommerce along with woocommerce simply order export plugin.
 2. Deactivate all plugins except woocommerce and woocommerce simply order export plugins, switch to default theme and check if issue still persists or not?
 3. If issue persists, consider contacting [here](http://sharethingz.com/contact)
 
-= How to export orders with specific statuses ? =
+= How to export orders with specific statuses? =
 
 Go to advanced options and then check statuses you want to export.
 
-= How to add more fields to csv ? =
+= When I select only product quantity or product variation or both without selecting product name, quantity and variation fields are blank =
+
+You should always select product name in order to get product quantity and product variation fields in csv as non-blank. If product name is not selected, product quantity and variation fields will be blank.
+
+= How to add more fields to csv? =
 
 Please use wpg_order_columns and wpg_before_csv_write hooks for performing this activity. Little WordPress programming knowledge is necessary for accomplishing this.
 
