@@ -1,204 +1,273 @@
+# Copyright (C) 2015 WooCommerce Simply Order Export
+# This file is distributed under the same license as the WooCommerce Simply Order Export package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Simply Order Export\n"
-"POT-Creation-Date: 2015-02-09 07:52+0530\n"
-"PO-Revision-Date: 2015-02-09 07:55+0530\n"
-"Last-Translator: \n"
-"Language-Team: wpgeeko <alnobody70@gmail.com>\n"
-"Language: English\n"
+"Project-Id-Version: WooCommerce Simply Order Export 1.2.3\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woocommerce-"
+"simply-order-export\n"
+"POT-Creation-Date: 2015-07-06 05:11:43+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
-"X-Poedit-KeywordsList: __;_e\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPath-1: lib\n"
+"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Ankit Gade <alnobody70@gmail.com>\n"
+"Language-Team: wpgeeko <alnobody70@gmail.com>\n"
 
-#: main.php:92 lib/order-export.php:110 lib/order-export.php:112
-msgid "Customer Name"
+#: classes/class-order-export-process.php:102
+msgid "Unable to create csv file, upload folder not writable"
 msgstr ""
 
-#: main.php:93
-msgid "Product Information"
+#: classes/class-order-export-process.php:146
+msgid "No orders for specified duration."
 msgstr ""
 
-#: main.php:94
-msgid "Order Amount ( $ )"
+#: classes/class-order-export.php:68
+msgid "Settings"
 msgstr ""
 
-#: main.php:95
-msgid "Customer Email"
-msgstr ""
-
-#: main.php:96
-msgid "Phone Number"
-msgstr ""
-
-#: main.php:97 lib/order-export.php:147 lib/order-export.php:154
-msgid "Order Status"
-msgstr ""
-
-#: lib/order-export.php:61
+#: classes/class-order-export.php:79
 msgid "Order Export"
 msgstr ""
 
-#: lib/order-export.php:98
+#: classes/class-order-export.php:113
 msgid "WooCommerce Order Export"
 msgstr ""
 
-#: lib/order-export.php:106
+#: classes/class-order-export.php:121
 msgid "Please choose settings for order export."
 msgstr ""
 
-#: lib/order-export.php:117
-msgid "Items Purchased"
+#: classes/class-order-export.php:125 classes/class-order-export.php:127
+#: main.php:94
+msgid "Order ID"
 msgstr ""
 
-#: lib/order-export.php:119
-msgid "Export product details."
+#: classes/class-order-export.php:132 classes/class-order-export.php:134
+#: main.php:95
+msgid "Customer Name"
 msgstr ""
 
-#: lib/order-export.php:124
+#: classes/class-order-export.php:139 main.php:96
+msgid "Product Name"
+msgstr ""
+
+#: classes/class-order-export.php:141
+msgid "Name of items purchased"
+msgstr ""
+
+#: classes/class-order-export.php:146 main.php:97
+msgid "Product Quantity"
+msgstr ""
+
+#: classes/class-order-export.php:148
+msgid "Quantity of items purchased"
+msgstr ""
+
+#: classes/class-order-export.php:153
+msgid "Product Variation"
+msgstr ""
+
+#: classes/class-order-export.php:155
+msgid "Product variation"
+msgstr ""
+
+#: classes/class-order-export.php:160
 msgid "Amount"
 msgstr ""
 
-#: lib/order-export.php:126
+#: classes/class-order-export.php:162
 msgid "Amount paid by customer"
 msgstr ""
 
-#: lib/order-export.php:131
+#: classes/class-order-export.php:167
 msgid "Email"
 msgstr ""
 
-#: lib/order-export.php:133
+#: classes/class-order-export.php:169
 msgid "Email of customer"
 msgstr ""
 
-#: lib/order-export.php:138
+#: classes/class-order-export.php:174
 msgid "Phone"
 msgstr ""
 
-#: lib/order-export.php:140
+#: classes/class-order-export.php:176
 msgid "Phone number of customer"
 msgstr ""
 
-#: lib/order-export.php:145
+#: classes/class-order-export.php:181
 msgid "Status"
 msgstr ""
 
-#: lib/order-export.php:152
+#: classes/class-order-export.php:183 classes/class-order-export.php:210
+#: main.php:102
+msgid "Order Status"
+msgstr ""
+
+#: classes/class-order-export.php:208
 msgid "Advanced Options"
 msgstr ""
 
-#: lib/order-export.php:178
+#: classes/class-order-export.php:232
 msgid "Select Duration and Export"
 msgstr ""
 
-#: lib/order-export.php:183
+#: classes/class-order-export.php:237
 msgid "Start Date"
 msgstr ""
 
-#: lib/order-export.php:187
+#: classes/class-order-export.php:241
 msgid "End Date"
 msgstr ""
 
-#: lib/order-export.php:192
+#: classes/class-order-export.php:246
 msgid "Export Orders"
 msgstr ""
 
-#: lib/order-export.php:208
+#: classes/class-order-export.php:262
 msgid "Click to see advanced options"
 msgstr ""
 
-#: lib/order-export.php:208
+#: classes/class-order-export.php:262
 msgid "Advanced options"
 msgstr ""
 
-#: lib/order-export.php:209
+#: classes/class-order-export.php:263
 msgid "These are one time use options and will not be saved."
 msgstr ""
 
-#: lib/order-export.php:215
+#: classes/class-order-export.php:271
 msgid "Order Export Filename"
 msgstr ""
 
-#: lib/order-export.php:216
+#: classes/class-order-export.php:272
 msgid "This will be the downloaded csv filename"
 msgstr ""
 
-#: lib/order-export.php:218
+#: classes/class-order-export.php:274
 msgid ".csv"
 msgstr ""
 
-#: lib/order-export.php:223
+#: classes/class-order-export.php:279
 msgid "Order Statuses"
 msgstr ""
 
-#: lib/order-export.php:224
+#: classes/class-order-export.php:280
 msgid ""
 "Orders with only selected status will be exported, if none selected then all "
 "order status will be exported"
 msgstr ""
 
-#: lib/order-export.php:227
+#: classes/class-order-export.php:283
 msgid "Completed"
 msgstr ""
 
-#: lib/order-export.php:228
+#: classes/class-order-export.php:284
 msgid "Processing"
 msgstr ""
 
-#: lib/order-export.php:229
+#: classes/class-order-export.php:285
 msgid "On hold"
 msgstr ""
 
-#: lib/order-export.php:230
+#: classes/class-order-export.php:286
 msgid "Pending"
 msgstr ""
 
-#: lib/order-export.php:231
+#: classes/class-order-export.php:287
 msgid "Cancelled"
 msgstr ""
 
-#: lib/order-export.php:232
+#: classes/class-order-export.php:288
 msgid "Refunded"
 msgstr ""
 
-#: lib/order-export.php:233
+#: classes/class-order-export.php:289
 msgid "Failed"
 msgstr ""
 
-#: lib/order-export.php:250
+#: classes/class-order-export.php:296
+msgid "Delimiter"
+msgstr ""
+
+#: classes/class-order-export.php:297
+msgid "Delimiter for exported file."
+msgstr ""
+
+#: classes/class-order-export.php:321
 msgid "Enter both dates"
 msgstr ""
 
-#: lib/order-export.php:254
+#: classes/class-order-export.php:325
 msgid "Invalid start date."
 msgstr ""
 
-#: lib/order-export.php:258
+#: classes/class-order-export.php:329
 msgid "Invalid end date."
 msgstr ""
 
-#: lib/order-export.php:262
+#: classes/class-order-export.php:333
 msgid "Invalid request"
 msgstr ""
 
-#: lib/order-export.php:264
+#: classes/class-order-export.php:335
 msgid "Invalid nonce."
 msgstr ""
 
-#: lib/order-export.php:268
+#: classes/class-order-export.php:339
 msgid ""
 "Invalid CSV filename. Only letters, numbers, dashes and underscore are "
 "allowed."
 msgstr ""
 
-#: lib/order-export-process.php:50
-msgid "Unable to create csv file, upload folder not writable"
+#: main.php:98
+msgid "Variation details"
 msgstr ""
 
-#: lib/order-export-process.php:111
-msgid "No orders for specified duration."
+#: main.php:99
+msgid "Order Amount"
+msgstr ""
+
+#: main.php:100
+msgid "Customer Email"
+msgstr ""
+
+#: main.php:101
+msgid "Phone Number"
+msgstr ""
+
+#: views/html-notice-addon-support.php:12
+msgid "Want to add more fields woocommerce simply order export?"
+msgstr ""
+
+#: views/html-notice-addon-support.php:13
+msgid "Want to reorder fields in woocommerce simply order export?"
+msgstr ""
+
+#: views/html-notice-addon-support.php:16
+msgid "Try Order Export Add-on"
+msgstr ""
+
+#: views/html-notice-addon-support.php:17
+msgid "Donate to this plugin"
+msgstr ""
+
+#: views/html-notice-addon-support.php:18
+msgid "Hide this notice"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "WooCommerce Simply Order Export"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Downloads order details in csv format"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Ankit Gade"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://sharethingz.com"
 msgstr ""
