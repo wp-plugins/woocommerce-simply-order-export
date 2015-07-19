@@ -52,6 +52,7 @@ Activate it through the 'Plugins' section.
 
 1. WooCommerce Simply Order Export setting page.
 2. Advanced options.
+3. Usage instructions in help tab.
 
 == Frequently Asked Questions ==
 
