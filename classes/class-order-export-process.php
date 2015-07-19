@@ -163,7 +163,7 @@ if( !class_exists('order_export_process') ) {
 					 * Check if we need order ID.
 					 */
 					case 'wc_settings_tab_order_id':
-						array_push( $csv_values, $order_details->id );
+						array_push( $csv_values, $order_details->get_order_number() );
 					break;
 
 					/**
@@ -244,7 +244,7 @@ if( !class_exists('order_export_process') ) {
 						 * @param String $key Current key in loop.
 						 * 
 						 */
-						do_action_ref_array( 'wpg_add_values_to_csv', array( &$csv_values, $order_details, $key ) );
+						do_action_ref_array( 'wpg_add_values_to_csv', array( &$csv_values, $order_details, $key, $fields, $item_id, $current_item ) );
 					break;
 				}
 			}
