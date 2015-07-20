@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-if( !class_exists() ) :
+if( !class_exists('wsoe_admin_help') ) :
 
 	class wsoe_admin_help {
 
@@ -63,6 +63,6 @@ if( !class_exists() ) :
 	
 	}
 
-endif;
+	return new wsoe_admin_help();
 
-return new wsoe_admin_help();
+endif;

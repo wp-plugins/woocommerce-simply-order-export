@@ -4,7 +4,7 @@ Donate link: http://sharethingz.com
 Tags: woocommerce, order, export, csv, duration, woocommerce-order, woocommerce-order-export
 Requires at least: 4.0
 Tested up to: 4.2.2
-Stable tag: 1.2.4
+Stable tag: 1.2.5
 License: GPLv2 or later (of-course)
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,6 +39,7 @@ You can add more fields to export and extend the functionality by using hooks. I
 > **Purchase Add-on**
 >
 > Get your WooCommerce Simply Order Export Add-on from [this link](http://sharethingz.com/woocommerce-simply-order-export-add-on/?utm_source=readme&utm_medium=plugin&utm_campaign=wsoe)
+>
 > Documentation of this add-on is present at [WooCommerce Simply Order Export Add-on Documentation](https://github.com/ankitrox/WooCommerce-Simply-Order-Export-Add-on-Doc/blob/master/README.md)
 
 == Installation ==
@@ -52,7 +53,7 @@ Activate it through the 'Plugins' section.
 
 1. WooCommerce Simply Order Export setting page.
 2. Advanced options.
-3. Usage instructions in help tab.
+3. Usage instructions in admin help tab.
 
 == Frequently Asked Questions ==
 
@@ -73,6 +74,9 @@ Please use wpg_order_columns and wpg_before_csv_write hooks for performing this 
 You can also opt for woocommerce simply order export add-on, it is available [here](http://sharethingz.com/woocommerce-simply-order-export-add-on/?utm_source=readme&utm_medium=plugin&utm_campaign=wsoe). It adds all the fields related to orders and allows users to reorder the fields using drag and drop interface.
 
 == Changelog ==
+
+= 1.2.5 =
+* Bug Fix: admin help class class_exists missing parameter.
 
 = 1.2.4 =
 * Bug Fix: Getting order number instead of order post ID.
