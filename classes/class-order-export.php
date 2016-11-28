@@ -29,8 +29,25 @@ if( !class_exists( 'wpg_order_export' ) ){
 			add_action( 'admin_init' , array( $this, 'wsoe_download' ) );
 			add_filter( 'plugin_action_links_'.WSOE_BASENAME, array($this, 'wsoe_action_links') );
 			add_action( 'woocommerce_settings_saved', array( $this, 'settings_saved' ) );
+            
+            //Add the woocommerce menu page
+            add_action( 'admin_menu', array( $this, 'add_options_dsum_page' ) );
 		}
+        
+        //Function to add the woocommerce menu page
+        public function add_options_dsum_page() {
+    
+        }
+            
+        public function options_dsum_page_display() {
+        ?>
+            <div class="wrap">
+                <div id="icon-options-general" class="icon32"></div>
+            </div><!-- /.wrap -->
+        <?php
+        } // end options_dsum_page_display
 
+        
 		/**
 		 * Runs when plugin is activated.
 		 */
