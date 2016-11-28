@@ -8,6 +8,9 @@ if( !class_exists('order_export_process') ) {
 
 	class order_export_process {
 
+		/**
+		 * Delimiter for CSV file
+		 */
 		static $delimiter;
 
 		/**
@@ -69,7 +72,7 @@ if( !class_exists('order_export_process') ) {
 		static function get_orders() {
 
 			$fields		=	self::export_options();
-			$fields		=	array_filter( $fields, 'wpg_array_filter' );
+			$fields		=	array_filter( $fields, 'wsoe_array_filter' );
 			$headings	=	self::csv_heading($fields);
 
 			$delimiter	=	( empty( $_POST['wpg_delimiter'] ) || ( gettype( $_POST['wpg_delimiter'] ) !== 'string' ) ) ? ',' : $_POST['wpg_delimiter'][0];
@@ -85,7 +88,7 @@ if( !class_exists('order_export_process') ) {
 			$order_statuses	=	( !empty( $_POST['order_status'] ) && is_array( $_POST['order_status'] ) ) ? $_POST['order_status'] : array_keys( wc_get_order_statuses() );
 
 			$args = array( 'post_type'=>'shop_order', 'posts_per_page'=>-1, 'post_status'=> apply_filters( 'wpg_order_statuses', $order_statuses ) );
-			$args['date_query'] = array( array( 'after'=>  filter_input( INPUT_POST, 'start_date', FILTER_DEFAULT ), 'before'=> filter_input( INPUT_POST, 'end_date', FILTER_DEFAULT ), 'inclusive' => true ) );
+			$args['date_query'] = array( array( 'after'=>  $_POST['start_date'], 'before'=> $_POST['end_date'], 'inclusive' => true ) );
 
 			$args = apply_filters( 'wsoe_query_args', $args );
 
@@ -115,26 +118,12 @@ if( !class_exists('order_export_process') ) {
 
 					$order_details = new WC_Order( get_the_ID() );
 
-					/**
-					 * Check if we need to export product name.
-					 * If yes, then create new row for each product.
-					 */
-					if( array_key_exists( 'wc_settings_tab_product_name', $fields ) ) {
+					$items = $order_details->get_items();
 
-						$items = $order_details->get_items();
+					foreach( $items as $item_id=>$item ) {
 
-						foreach( $items as $item_id=>$item ) {
-
-							$csv_values = array();
-							self::add_fields_diff_row( $fields, $csv_values, $order_details, $item_id, $item );
-							fputcsv( $csv_file, $csv_values, self::$delimiter );
-						}
-
-					}else{
-						/**
-						 * Create a single row for order.
-						 */
-						self::add_fields_diff_row( $fields, $csv_values, $order_details );
+						$csv_values = array();
+						self::add_fields_diff_row( $fields, $csv_values, $order_details, $item_id, $item );
 						fputcsv( $csv_file, $csv_values, self::$delimiter );
 					}
 
@@ -164,6 +153,7 @@ if( !class_exists('order_export_process') ) {
 					 */
 					case 'wc_settings_tab_order_id':
 						array_push( $csv_values, $order_details->get_order_number() );
+						do_action_ref_array( 'wsoe_after_value_'.$key, array( &$csv_values, $order_details, $item_id, $current_item ) );
 					break;
 
 					/**
@@ -171,6 +161,7 @@ if( !class_exists('order_export_process') ) {
 					 */
 					case 'wc_settings_tab_customer_name':
 						array_push( $csv_values, self::customer_name( get_the_ID() ) );
+						do_action_ref_array( 'wsoe_after_value_'.$key, array( &$csv_values, $order_details, $item_id, $current_item ) );
 					break;
 
 					/**
@@ -178,6 +169,7 @@ if( !class_exists('order_export_process') ) {
 					 */
 					case 'wc_settings_tab_product_name':
 						array_push( $csv_values, $current_item['name'] );
+						do_action_ref_array( 'wsoe_after_value_'.$key, array( &$csv_values, $order_details, $item_id, $current_item ) );
 					break;
 
 					/**
@@ -187,29 +179,24 @@ if( !class_exists('order_export_process') ) {
 					 * If product name is not selected, this column will be filled with just dashes. ;)
 					 */
 					case 'wc_settings_tab_product_quantity':
-						if( array_key_exists( 'wc_settings_tab_product_name', $fields ) ) {
-							array_push( $csv_values, $current_item['qty'] );
-						}else{
-							array_push( $csv_values, '-' ); // pad the quantity column with dash if there is no product name
-						}
+						array_push( $csv_values, $current_item['qty'] );
+						do_action_ref_array( 'wsoe_after_value_'.$key, array( &$csv_values, $order_details, $item_id, $current_item ) );
 					break;
 					
 					/**
 					 * Check if we need product variations
 					 */
 					case 'wc_settings_tab_product_variation':
-						if( array_key_exists( 'wc_settings_tab_product_name', $fields ) ) {
-							array_push( $csv_values, self::get_product_variation( $item_id, $order_details ) );
-						}else{
-							array_push( $csv_values, '-' );
-						}
+						array_push( $csv_values, self::get_product_variation( $item_id, $order_details ) );
+						do_action_ref_array( 'wsoe_after_value_'.$key, array( &$csv_values, $order_details, $item_id, $current_item ) );
 					break;
 
 					/**
 					 * Check if we need order amount.
 					 */
 					case 'wc_settings_tab_amount':
-						array_push( $csv_values, $order_details->get_total() );
+						array_push( $csv_values, wsoe_formatted_price( $order_details->get_total(), $order_details ) );
+						do_action_ref_array( 'wsoe_after_value_'.$key, array( &$csv_values, $order_details, $item_id, $current_item ) );
 					break;
 							
 					/**
@@ -217,6 +204,7 @@ if( !class_exists('order_export_process') ) {
 					 */
 					case 'wc_settings_tab_customer_email':
 						array_push( $csv_values, self::customer_meta( get_the_ID(), '_billing_email' ) );
+						do_action_ref_array( 'wsoe_after_value_'.$key, array( &$csv_values, $order_details, $item_id, $current_item ) );
 					break;
 
 					/**
@@ -224,6 +212,7 @@ if( !class_exists('order_export_process') ) {
 					 */
 					case 'wc_settings_tab_customer_phone':
 						array_push( $csv_values, self::customer_meta( get_the_ID(), '_billing_phone' ) );
+						do_action_ref_array( 'wsoe_after_value_'.$key, array( &$csv_values, $order_details, $item_id, $current_item ) );
 					break;
 
 					/**
@@ -231,6 +220,7 @@ if( !class_exists('order_export_process') ) {
 					 */
 					case 'wc_settings_tab_order_status':
 						array_push( $csv_values, ucwords($order_details->get_status()) );
+						do_action_ref_array( 'wsoe_after_value_'.$key, array( &$csv_values, $order_details, $item_id, $current_item ) );
 					break;
 
 					default :
@@ -245,12 +235,13 @@ if( !class_exists('order_export_process') ) {
 						 * 
 						 */
 						do_action_ref_array( 'wpg_add_values_to_csv', array( &$csv_values, $order_details, $key, $fields, $item_id, $current_item ) );
+						do_action_ref_array( 'wsoe_after_value_'.$key, array( &$csv_values, $order_details, $item_id, $current_item ) );
 					break;
 				}
 			}
 
 		}
-		
+
 		/**
 		 * Returns customer related meta.
 		 * Basically it is just get_post_meta() function wrapper.
@@ -266,6 +257,7 @@ if( !class_exists('order_export_process') ) {
 		static function get_product_variation ( $product_id, $order_details ) {
 
 			$metadata = $order_details->has_meta( $product_id );
+			$_product = new WC_Product( $product_id );
 
 			$exclude_meta = apply_filters( 'woocommerce_hidden_order_itemmeta', array(
 				'_qty',
@@ -307,7 +299,7 @@ if( !class_exists('order_export_process') ) {
 
 			return $variation_details = implode( ' | ', $variation_details );
 		}
-		
+
 		/**
 		 * Returns customer name for particular order
 		 * @param type $order_id
@@ -341,6 +333,8 @@ if( !class_exists('order_export_process') ) {
 
 				if( $val === true && array_key_exists( $key, $wpg_order_columns ) ){
 					array_push( $headings, $wpg_order_columns[$key] );
+					// By using this we can add heading for keys which are not sanitized.
+					do_action_ref_array( 'wsoe_after_heading_'.$key, array( &$headings ) );
 				}
 			}
 
@@ -353,8 +347,18 @@ if( !class_exists('order_export_process') ) {
 		 */
 		static function create_csv_file() {
 
-			$upload_dir = wp_upload_dir();
-			return $csv_file = fopen( $upload_dir['basedir']. '/order_export.csv', 'w+');
+			$csv_filename = empty($_POST['woo_soe_csv_name']) ? 'order_export.csv' : sanitize_file_name($_POST['woo_soe_csv_name']) .'.csv';
+			$new_filename = wp_unique_filename( trailingslashit( wsoe_upload_dir() ), $csv_filename );
+
+			$csv_file = fopen( trailingslashit( wsoe_upload_dir() ) . $new_filename, 'w+' );
+
+			do_action( 'wsoe_file_created', $_POST['start_date'], $_POST['end_date'], $new_filename, $csv_file );
+
+			/**
+			 * Save file name in global for later use.
+			 */
+			$GLOBALS['wsoe_filename'] = str_replace( '.csv', '', $new_filename );
+			return $csv_file;
 		}
 	}
 }
