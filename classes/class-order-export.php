@@ -37,12 +37,15 @@ if( !class_exists( 'wpg_order_export' ) ){
         //Function to add the woocommerce menu page
         public function add_options_dsum_page() {
     
+            add_submenu_page('woocommerce', 'Order Export', 'Order Export', 'manage_woocommerce', 'wc_options', array($this,'options_dsum_page_display' ));
         }
             
         public function options_dsum_page_display() {
         ?>
             <div class="wrap">
                 <div id="icon-options-general" class="icon32"></div>
+                <h2>WooCommerce Order Export</h2>
+                <p>Please choose settings for order export.</p><hr>
             </div><!-- /.wrap -->
         <?php
         } // end options_dsum_page_display
