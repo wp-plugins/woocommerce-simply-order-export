@@ -21,14 +21,14 @@ if( !class_exists('wsoe_admin_help') ) :
 		function add_tabs() {
 
 			$screen = get_current_screen();
-			$wc_screen_id = sanitize_title( __( 'WooCommerce', 'woocommerce' ) );
+			$wc_screen_id = sanitize_title( __( 'WooCommerce', 'woocommerce-simply-order-export' ) );
 			$wsoe_tab = ( !empty( $_GET['tab'] ) && $_GET['tab'] == 'order_export' ) ? true : false;
 			
 			if( $screen->id === $wc_screen_id . '_page_wc-settings' && $wsoe_tab ) {
 
 				$screen->add_help_tab( array(
 					'id'        => 'wsoe_help_tab',
-					'title'     => __( 'Order Export', 'woocommerce' ),
+					'title'     => __( 'Order Export', 'woocommerce-simply-order-export' ),
 					'content'   =>
 
 						'<p>' . __( 'Thank you for using <strong>WooCommerce Simply Order Export</strong> plugin :)', 'woocommerce-simply-order-export' ) . '</p>' .
@@ -46,7 +46,7 @@ if( !class_exists('wsoe_admin_help') ) :
 
 				$screen->add_help_tab( array(
 					'id'        => 'wsoe_addon_tab',
-					'title'     => __( 'Order Export Add-on', 'woocommerce' ),
+					'title'     => __( 'Order Export Add-on', 'woocommerce-simply-order-export' ),
 					'content'   =>
 
 						'<p>' . __( 'With <strong>WooCommerce Simply Order Export Add-on</strong>, you can do following things.', 'woocommerce-simply-order-export' ) . '</p>' .
@@ -57,10 +57,25 @@ if( !class_exists('wsoe_admin_help') ) :
 						'</ol>'.
 
 						'<p><a target="_blank" href="' . 'http://sharethingz.com/woocommerce-simply-order-export-add-on/' . '" class="button button-primary">' . __( 'Purchase Add-on', 'woocommerce-simply-order-export' ) . '</a> <a target="_blank" href="' . 'https://github.com/ankitrox/WooCommerce-Simply-Order-Export-Add-on-Doc/blob/master/README.md' . '" class="button">' . __( 'Add-on Documentation', 'woocommerce-simply-order-export' ) . '</a></p>'
-				) );				
+				) );			
+
+				$screen->add_help_tab( array(
+					'id'        => 'wsoe_scheduler_tab',
+					'title'     => __( 'Order Export Scheduler and Logger', 'woocommerce-simply-order-export' ),
+					'content'   =>
+
+						'<p>' . __( 'With <strong>Order Export Scheduler and Logger</strong>plugin, you can do following things.', 'woocommerce-simply-order-export' ) . '</p>' .
+
+						'<ol>'.
+							'<li>'.__( 'Schedule order export process for future.', 'woocommerce-simply-order-export' ).'</li>'.
+							'<li>'.__( 'Maintain log of already exported reports. You can also download those reports either individually or in bulk (zip).', 'woocommerce-simply-order-export' ).'</li>'.
+						'</ol>'.
+
+						'<p><a target="_blank" href="' . 'http://sharethingz.com/downloads/wsoe-scheduler-logger/' . '" class="button button-primary">' . __( 'Purchase Add-on', 'woocommerce-simply-order-export' ) . '</a> <a target="_blank" href="' . 'https://github.com/ankitrox/Order-Export-Scheduler-and-Logger/blob/master/README.md' . '" class="button">' . __( 'Add-on Documentation', 'woocommerce-simply-order-export' ) . '</a></p>'
+				) );	
+
 			}
 		}
-	
 	}
 
 	return new wsoe_admin_help();

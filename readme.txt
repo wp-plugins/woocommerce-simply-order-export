@@ -1,10 +1,10 @@
 === WooCommerce Simply Order Export ===
-Contributors: ankitgadertcampcom
+Contributors: ankitgadertcampcom, wpgurudev
 Donate link: http://sharethingz.com
 Tags: woocommerce, order, export, csv, duration, woocommerce-order, woocommerce-order-export
-Requires at least: 4.0
-Tested up to: 4.2.2
-Stable tag: 1.2.5
+Requires at least: 4.4
+Tested up to: 4.6.1
+Stable tag: 2.0.8
 License: GPLv2 or later (of-course)
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,6 +19,7 @@ You can add more fields to export and extend the functionality by using hooks. I
 
 * Easy to install and setup
 * Very simplified and clean UI.
+* Exports each product in order in separate line.
 * Easily customizable
 * Exports csv file containing information of WooCommerce orders
 * Exports orders between certain duration, you can select start and end date.
@@ -41,6 +42,22 @@ You can add more fields to export and extend the functionality by using hooks. I
 > Get your WooCommerce Simply Order Export Add-on from [this link](http://sharethingz.com/woocommerce-simply-order-export-add-on/?utm_source=readme&utm_medium=plugin&utm_campaign=wsoe)
 >
 > Documentation of this add-on is present at [WooCommerce Simply Order Export Add-on Documentation](https://github.com/ankitrox/WooCommerce-Simply-Order-Export-Add-on-Doc/blob/master/README.md)
+
+
+= Features in Order Export Scheduler and Logger Add-on =
+
+* Schedule the order export for future.
+* Export will be repeat itself after specified interval of time automatically.
+* Log already exported reports.
+* Download logged reports individually.
+* Download logged reports in bulk by selecting multiple reports (zip extension should be installed on server).
+
+> **Purchase Order Export Scheduler and Logger Add-on**
+>
+> Get your Order Export Scheduler and Logger Add-on from [this link](http://sharethingz.com/downloads/wsoe-scheduler-logger/?utm_source=readme&utm_medium=plugin&utm_campaign=wsoe)
+>
+> Documentation of this add-on is present at [Order Export Scheduler and Logger Add-on Documentation](https://github.com/ankitrox/Order-Export-Scheduler-and-Logger/blob/master/README.md)
+
 
 == Installation ==
 Install WooCommerce Simply Order Export from the 'Plugins' section in your dashboard (Plugins > Add New > Search for WooCommerce Simply Order Export ).
@@ -74,6 +91,44 @@ Please use wpg_order_columns and wpg_before_csv_write hooks for performing this 
 You can also opt for woocommerce simply order export add-on, it is available [here](http://sharethingz.com/woocommerce-simply-order-export-add-on/?utm_source=readme&utm_medium=plugin&utm_campaign=wsoe). It adds all the fields related to orders and allows users to reorder the fields using drag and drop interface.
 
 == Changelog ==
+
+= 2.0.8 =
+* Minor fix: Removed product name check for adding fields in csv to solve 500 internal errors.
+* Miscellaneous: Code cleanup. Removed unnecessary blocks of code.
+
+= 2.0.7 =
+* Minor fix: php support for older than 5.4.0 added for html_entity_decode function
+
+= 2.0.6 =
+* Minor fix: Invalid argument in foreach warning fixed.
+
+= 2.0.5 =
+* Minor fix: wsoe_after_value_* hook
+
+= 2.0.4 =
+* Feature Add: Introduced wsoe_after_heading_* action to add headings for non-sanitized meta keys.
+* Feature Add: Introduced wsoe_after_value_* action to add values for non-sanitized meta keys.
+
+= 2.0.3 =
+* Minor fix: Priority changed for wsoe_fix_weird_chars
+
+= 2.0.2 =
+* Bug Fix: weird characters issue on MS-Excel resolved.
+* Added extra setting field for character set fix for Excel.
+* Compatibility test with WordPress 4.4 and latest woocommerce passed.
+
+= 2.0.1 =
+* Bug Fix: htaccess missing notice.
+
+= 2.0.0 =
+* Feature: Files created will be preserved and kept in separate folder.
+* Bug Fix: Content-Encoding added in header while downloading file to avoid strange characters.
+* Feature: Advanced options values are now persistent and can be saved for future use.
+* Bug Fix: "Hide Notice" button fix.
+* Compatibility: Order export scheduler and logger plugin compatibility.
+* Added Portuguese translation.
+* Feature: Formatted prices.
+* Bug Fix: Removed deprecated functions.
 
 = 1.2.5 =
 * Bug Fix: admin help class class_exists missing parameter.
